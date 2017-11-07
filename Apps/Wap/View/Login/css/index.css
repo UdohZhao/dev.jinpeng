@@ -1,0 +1,74 @@
+.bckImg{
+	background-image: url("/Apps/Wap/View/Login/img/登陆或注册2.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+.logo{
+	width: 45%;
+	margin-top: 30%;
+	margin-bottom: 10%;
+}
+.form-group{
+	position: relative;
+	margin: 10px auto;
+	height: 40px;
+}
+.form-group span{
+	position: absolute;
+	top: 6px;
+	left: 10px;
+	color: #a2a2a3;
+}
+.form-control{
+	height: 40px;
+	padding-left: 40px;
+	border: 1px solid #f4c16f;
+}
+.btnLogin{
+	width: 100%;
+	height: 40px;
+	background-color: #f4c16f;
+	color: #000;
+	border: none;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 4px;
+}
+.weui-dialog--visible .weui-dialog__ft{
+	display: none;
+}
+.goSignin{
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	margin-top: 5px;
+	font-weight: bold;
+	letter-spacing: 2px;
+}
+.goSignin a{
+	text-decoration: none;
+}
+.verification_code{
+	width: 100%;
+}
+.verification_code .code_left{
+	width: 65%;
+	height: 40px;
+	position: relative;
+	float: left;
+}
+.verification_code .code_right{
+	display: inline-block;
+	width: 35%;
+	height: 40px;
+	padding: 1px 0;
+	padding-left: 3px;
+}
+.verification_code .code_right .inputPassword4_img{
+	width: 100%;
+	height: 100%;
+}

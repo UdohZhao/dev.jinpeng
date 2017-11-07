@@ -1,0 +1,118 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Signin/css/index.css">
+
+	<!-- 内容主体 start-->
+	<div class="container bckImg">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12">
+				<img class="logo" src="/Apps/Wap/View/Signin/img/logo.png">
+			</div>
+			<form id="signinForm" action="__APP__/Signin/index" method="post">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset1">
+				
+					<div class="row">
+						<select class="selects" id="cid" >
+							<foreach name="pdata" item="vo" key="k">
+								<option value="{$vo.id}">{$vo.cname}</option>
+							</foreach>
+						</select>
+						<select class="selects" id="scid"  name="cid">
+							<foreach name="sdata" item="vo" key="k">
+								<option value="{$vo.id}">{$vo.cname}</option>
+							</foreach>
+						</select>
+					</div>
+					<div class="form-group">
+					  	<label class="sr-only" for="userName">Name</label>
+					   	<input type="text" class="form-control" id="userName" placeholder="请输入用户名" name="username">
+					   	<span class="fa fa-user fa-2x"></span>
+					</div>
+					<div class="form-group">
+					    <label class="sr-only" for="keyWords">Email</label>
+					    <input type="password" class="form-control" id="keyWords" placeholder="请输入密码" name="password">
+					   	<span class="fa fa-lock fa-2x"></span>
+					</div>
+					<div class="form-group">
+					    <label class="sr-only" for="keywordsConfirm">Email</label>
+					    <input type="password" class="form-control" id="keywordsConfirm" placeholder="请确认密码" name="confirmPassword">
+					   	<span class="fa fa-lock fa-2x"></span>
+					</div>
+					<button type="submit" id="bt" class="btn btn-default btnSignin">立即注册</button>
+					<p class="goLogin">已有账号？<a href="/Wap/Login/index">返回登录</a></p>
+					
+			</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- 内容主体 end-->
+
+<include file="Layouts/footer" />
+
+<script type="text/javascript" src="/Apps/Wap/View/Layouts/js/bckImg.js"></script>
+<script type="text/javascript" src="/Apps/Wap/View/Signin/js/index.js"></script>
+<!-- 注册弹出框 -->
+<!-- <script type="text/javascript">
+	$(".btnSignin").click(function(){
+		$.modal({
+		  title: "<img src='/Apps/Wap/View/Layouts/img/开心-1.png' />",
+		  text: "注册成功！<br />正在跳转到登陆页面"
+		},function(){
+			setTimeout(function(){
+				window.location.href='/Wap/Login/index';//定时跳转到学生页面
+			},2000);
+		});
+	})
+</script> -->
+<!--
+<script>
+
+	function sel(){
+		$(function(){
+			var cid=$("#scid").val();
+			if(cid==""){
+				alert("请选择班级");
+				return false;
+			}
+			var name=$("#userName").val();
+			if(name==""){
+				alert("请输入账号");
+				return false;
+
+			}
+			var keyW=$("#keyWords").val();
+			if(keyW==""){
+				alert("请输入密码");
+				return false;
+
+			}
+			var confirms=$("#keywordsConfirm").val();
+			if(confirms==""){
+				alert("请输入确认密码");
+				return false;
+
+			}
+		})
+	}
+	$(function(){
+
+		$("#bt").click(function(){
+
+
+			$("#signinForm").ajaxSubmit(function(re){
+
+				if(re==2){
+					alert("该用户已被注册，请从新注册");
+					window.location.href="__APP__/Signin/index";
+				}else if(re==1){
+					alert("注册成功,请登录");
+					window.location.href="__APP__/Login/index";
+				}else if(re==false){
+					alert("注册失败");
+					window.location.href="__APP__/Signin/index";
+				}
+			})
+		});
+	})
+</script>-->

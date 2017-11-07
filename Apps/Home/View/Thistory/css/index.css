@@ -1,0 +1,29 @@
+.classtitle{
+  padding: 20px;
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+.classcontent{
+  padding: 20px;
+  height: 450px;
+  letter-spacing: 3px;
+}
+.historyperiod ul li a{
+  font-size: 20px;
+  margin: 10px 0px;
+}
+.historyperiod ul li a:hover{
+  background-color: #E83015;
+  border:1px solid #E83015;
+  color: #FCFAF2;
+}
+.active{
+  background-color: #E83015!important;
+  border:1px solid #E83015!important;
+  color: #FCFAF2!important;
+}
+.historypage{
+  padding: 20px;
+  font-size: 18px;
+  text-align: center;
+}

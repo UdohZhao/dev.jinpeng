@@ -1,0 +1,10 @@
+#sel{
+	height: 35px;
+	border: none;
+	border: 1px solid #ccc;
+	padding: 3px 0;
+	padding-left: 3px;
+}
+.bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){
+	width: auto !important;
+}

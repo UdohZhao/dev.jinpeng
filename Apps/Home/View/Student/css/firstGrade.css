@@ -1,0 +1,62 @@
+body{
+	background: none;
+}
+.back_img{
+	background: none;
+	background-image: url("../img/书3.png");
+	background-size: 100% 100%;
+	opacity: .85;
+	height: 90%;
+	width: 803px;
+}
+h3{
+	margin: 0;
+}
+.content{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 80px;
+	padding-bottom: 20px;
+	padding-left: 74px;
+	padding-right: 45px;
+}
+.radio-inline a>img.tick{
+	display: block;
+}
+.content a{
+	font-size: 18px;
+	color: #000;
+	text-decoration: none;
+	letter-spacing: 2px;
+	font-weight: bold;
+}
+.content a span{
+	color: #fff;
+}
+.list-inline{
+	padding-left: 20px;
+}
+.list-inline li{
+	text-align: center;
+	padding:10px 10px;
+	opacity: .8;
+	/*background-color: #ac6d32;*/
+	margin: 10px 10px;
+	background-image: url("../img/橡皮擦.png");
+	background-size: 100% 100%;
+	transition: all 1s;
+	-ms-transition: all 1s;  /* IE 9 */
+	-moz-transition: all 1s; /* Firefox 4 */
+	-webkit-transition: all 1s; /* Safari 和 Chrome */
+	-o-transition: all 1s; /* Opera */
+}
+.list-inline li:hover{
+	transform: scale(1.2);
+	-ms-transform: scale(1.2); 	/* IE 9 */
+	-moz-transform: scale(1.2); 	/* Firefox */
+	-webkit-transform: scale(1.2); /* Safari 和 Chrome */
+	-o-transform: scale(1.2); 	/* Opera */
+}

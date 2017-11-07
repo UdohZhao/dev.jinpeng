@@ -1,0 +1,195 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Teacher/css/index.css">
+<!-- 搜索框 -->
+<include file="./Apps/Wap/View/Layouts/serch.html" />
+	<!-- 内容主体 start-->
+<div id="list">
+	<!-- 学生得分列表循环 start-->
+	<foreach name="history" item="v">
+	<div class="container-fluid scoreList">
+		<div class="container">
+			<div class="row">
+
+					<div class="col-xs-4 col-sm-4">
+						<div class="stuName named">
+							<a href="#" value="uid/{$v.uid}/perid/{$v.perid}">{$v.studentname}</a>
+							<if condition="$v.suppType eq null">
+								<div class="redSqual">1</div>  <!--是否有补充评论-->
+								<elseif condition="$v.suppType eq 1"/>
+								<div class="greySqual">1</div>
+								<elseif condition="$v.suppType eq 0"/>
+								<div class="redSqual"><span>1</span></div>
+							</if>
+						</div>
+					</div>
+
+						<div class="col-xs-5 col-sm-5 growthPoints">
+							<a style="display: none">成长趋势：<span>--</span></a>
+						</div>
+
+					<if condition="$v.status eq 0">
+						<div class="col-xs-3 col-sm-3 chioceImg">
+							<a href="#" value="{$v.uid}" id="{$v.id}" class="fa fa-hand-o-up fa-2x"></a>
+						</div>
+					</if>
+
+				<div class="col-xs-12 col-sm-12">
+					<table>
+						<thead>
+							<tr>
+								<td>自我评价</td>
+								<td>家长评价</td>
+								<td>同学评价</td>
+								<td>综合评价</td>
+								<td>评价得分</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<!-- 分数循环 start-->
+
+									<td id="ego{$v.id}">{$v.ego}</td>
+									<td id="patriarch{$v.id}">{$v.patriarch}</td>
+									<td id="schoolmate{$v.id}">{$v.schoolmate}</td>
+									<if condition="$v.status eq 0">
+										<td id="evalu{$v.id}"> 待评价</td>
+										<else/>
+										<td id="evalu{$v.id}"> {$v.grade}</td>
+									</if>
+									<td><span id="p{$v.id}">
+												  <if condition="$v.status eq 0">
+													  			--
+													   <elseif condition="$v.status eq 1"/>
+													   优&nbsp;
+														<elseif condition="$v.status eq 2"/>
+														良&nbsp;
+														<elseif condition="$v.status eq 3"/>
+														中&nbsp;
+														<elseif condition="$v.status eq 4"/>
+														差&nbsp;
+													  </if>
+										</span>
+									</td>
+
+								<!-- 分数循环 end-->
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</foreach>
+	
+	<!-- 学生得分列表循环 end-->
+	
+
+
+</div>
+<!-- 分页 start-->
+<div class="row pages">
+	<div class="col-xs-12" style="text-align: center;">{$page}</div>
+</div>
+<!-- 分页 end-->	
+	<!-- 滚动加载 start-->
+	<!--<div class="weui-loadmore">
+	  <i class="weui-loading"></i>
+	  <span class="weui-loadmore__tips">正在加载</span>
+	</div>-->
+	<!-- 滚动加载 end-->
+	<!-- 评价总分 start-->
+	<div class="container-fluid scoreList scorelistDown">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4 col-sm-4">
+					<div class="named">
+						<a href="#">评价总分</a>
+					</div>
+				</div>
+				<div class="col-xs-8 col-sm-8 growthPoints">
+					<a>综合评价：<span>{$needScore['comfire']}</span></a>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+					<table>
+						<thead>
+							<tr>
+								<td>自我评价</td>
+								<td>家长评价</td>
+								<td>同学评价</td>
+								<td>综合评价</td>
+								<td style="width: 80px;">评价得分</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<!-- 分数循环 start-->
+								<td>{$needScore.egoAllScore}</td>
+								<td>{$needScore.patriarchAllScore}</td>
+								<td>{$needScore.schoolmateAllScore}</td>
+								<td>{$needScore.gradeAllScore}</td>
+								<td style="font-size: 12px;">{$needScore.comfire}</td>
+								<!-- 分数循环 end-->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 评价总分 end-->
+	<!-- 平均得分 start-->
+	<div class="container-fluid scoreList scorelistDown" style="border-bottom: 1px solid #bbbbbb;">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-4 col-sm-4">
+					<div class="named">
+						<a href="#">平均得分</a>
+					</div>
+				</div>
+				<div class="col-xs-8 col-sm-8 growthPoints">
+					<a>综合评价：<span>{$needScore['comfireGr']}</span></a>
+				</div>
+				<div class="col-xs-12 col-sm-12">
+					<table>
+						<thead>
+							<tr>
+								<td>自我评价</td>
+								<td>家长评价</td>
+								<td>同学评价</td>
+								<td>综合评价</td>
+								<td style="width: 80px;">评价得分</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<!-- 分数循环 start-->
+								<td>{$needScore.average1}</td>
+								<td>{$needScore.average0}</td>
+								<td>{$needScore.average2}</td>
+								<td>{$needScore.average3}</td>
+								<td style="font-size: 12px;">{$needScore.comfireGr}</td>
+								<!-- 分数循环 end-->
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 平均得分 end-->
+
+
+	<!-- 内容主体 end-->
+
+
+<!-- 底部菜单 -->
+<include file="Layouts/Tmenu" />
+
+<include file="Layouts/footer" />
+<!-- 滚动加载js -->
+<script type="text/javascript" src="/Apps/Wap/View/Teacher/js/crow.js"></script>
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Wap/View/Teacher/js/index.js"></script>

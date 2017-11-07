@@ -1,0 +1,43 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Sallgrades/css/index.css">
+	<!-- 页面主体 start-->
+	<div class="container-fluid" style="padding:0;">
+		<div class="container" style="padding-bottom: 10px;">
+			<div class="row" style="margin-top: 40px;">
+				<div class="col-xs-12 col-sm-12">
+					<strong>总共累计获得&nbsp;<span class="core">{$ScoreAll}</span>&nbsp;分</strong>
+				</div>
+			</div>
+			<div class="row" style="margin-top: 30px; position: relative;">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 mountain">
+					<div class="pictureBox">
+                      <div class="ulBox">
+                        <ul class="nowHere">
+                          <li><img src="/Apps/Wap/View/Sallgrades/img/水.png"></li>
+                          <li><img src="/Apps/Wap/View/Sallgrades/img/水.png"></li>
+                        </ul>
+                      </div>
+                      <div class="aa"></div>
+                    </div>
+                    <div class="tu">
+                      <img src="/Apps/Wap/View/Sallgrades/img/山1.png">
+                    </div>
+                    <div class="wrapper">
+                      <div class="counter col_fourth" style="color: red; font-weight: bolder;">
+                        <div class="timer timer6">{$ScoreAll}</div>
+                        <div class="bian">
+                        </div>
+                      </div>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 页面主体 end-->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Wap/View/Sallgrades/js/index.js"></script>
+<!-- 数字变化js -->
+<script type="text/javascript" src="/Apps/Wap/View/Student/js/jquery.countUp.js"></script>
+

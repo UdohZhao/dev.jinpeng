@@ -1,0 +1,97 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+  <!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title"># 题库管理</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">试题列表</h3>
+        </div>
+        <form id="searchForm" action="__APP__/Questionbank/listss/type/{$type}/id/{$period.id}" method="post">
+        <div class="input-group" style="margin-right: 20px;">
+            <input type="text" class="form-control input-lg" style="width: 200px;float: right;" placeholder="请输入关键字" name="search"><span class="input-group-addon btn btn-primary" onclick="$('#searchForm').submit();">搜索</span>
+        </div>
+        </form>
+        <div class="panel-body">
+        <if condition="($period)">
+          <ul class="list-inline" style="font-size: 16px;text-align: center; letter-spacing: 6px; font-weight: 300;margin-bottom: 30px;">
+            <li>
+              <eq name="period.status" value="0"><span class="text-success">【#最新周期】</span></eq>
+              <eq name="period.status" value="1"><span class="text-danger">【#过往周期】</span></eq>
+              <eq name="period.status" value="2"><span class="text-success">【#正在进行中】</span></eq>
+            </li>
+            <li> 当前周期：<span class="text-danger">{$period.periods}</span> </li>
+            <li> 开始时间：<span class="text-danger">{$period.start_time|date='Y-m-d',###}</span> </li>
+            <li> 结束时间：<span class="text-danger">{$period.end_time|date='Y-m-d',###}</span> </li>
+          </ul>
+          <ul class="nav nav-pills">
+            <li role="presentation" <if condition="($type eq 0)">class="active"</if> ><a href="__APP__/Questionbank/listss/type/0/id/{$period.id}">低段</a></li>
+            <li role="presentation" <if condition="($type eq 1)">class="active"</if> ><a href="__APP__/Questionbank/listss/type/1/id/{$period.id}">中段</a></li>
+            <li role="presentation" <if condition="($type eq 2)">class="active"</if> ><a href="__APP__/Questionbank/listss/type/2/id/{$period.id}">高段</a></li>
+          </ul>
+           <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>试题</th>
+                <th>备选答案</th>
+                <th>单选&多选</th>
+                <th>排序</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            <foreach name="data" item="vo" key="k">
+              <tr>
+                <td>
+                  <eq name="vo.status" value="0"><button type="button" class="btn btn-success btn-xs">新题</button></eq>
+                  <eq name="vo.status" value="1"><button type="button" class="btn btn-danger btn-xs">老题</button></eq>
+                  <eq name="vo.status" value="2"><button type="button" class="btn btn-danger btn-xs">弃用</button></eq>
+                </td>
+                <td>{$vo.test_questions}</td>
+                <td>
+                  <ul class="list-unstyled">
+                   <php>
+                     for( $i=0; $i< count($vo['keyss']); $i++ ){
+                        echo "<li>".$vo['keyss'][$i]." : ".$vo['valss'][$i]."分</li>";
+                     }
+                   </php>
+                  </ul>
+                </td>
+                <td>
+                  <eq name="vo.nature" value="0">
+                     单选
+                  <else/>
+                     多选
+                  </eq>
+                </td>
+                <td>{$vo.sort}</td>
+                <td>
+                <eq name="period.status" value="0">
+                <button type="button" class="btn btn-primary btn-xs" onclick="javascript:window.location.href='__APP__/Questionbank/index/id/{$vo.id}'" >修改</button>
+                </eq>
+                <button type="button" class="btn btn-default btn-xs" onclick="del({$vo.id});">删除</button>
+                </td>
+              </tr>
+            </foreach>
+            </tbody>
+          </table>
+          <div style="float: right;">
+            {$page}
+          </div>
+        <else/>
+          <blockquote>
+            <p>检测到当前没有配置最新周期，暂无试题数据。</p>
+          </blockquote>
+        </if>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script src="/Admin/Apps/Admin/View/Questionbank/js/listss.js"></script>

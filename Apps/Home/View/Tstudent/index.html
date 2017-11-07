@@ -1,0 +1,59 @@
+<include file="./Apps/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Tstudent/css/index.css">
+  <!-- 右侧核心内容 start -->
+    <div class="row">
+      <div class="col-md-12 classtitle">
+        <ul class="list-unstyled">
+          <li>{$name.name}，</li>
+          <li><small>历史周期评分记录</small></li>
+        </ul>
+      </div>
+      <div class="col-md-12 classcontent">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>历史周期</th>
+              <th>自我评价</th>
+              <th>家长评价</th>
+              <th>同学评价</th>
+              <th>评价得分</th>
+              <th>综合评价</th>
+              <th>成长趋势</th>
+            </tr>
+          </thead>
+          <tbody>
+          <foreach name="history" item="v">
+            <tr>
+              <td><a target="view_window" href="__APP__/Student/Grade/uid/{$v.uid}/perid/{$v.perid}/userT/1">{$v.periods}</a></td>
+              <td>{$v.ego}</td>
+              <td>{$v.patriarch}</td>
+              <td>{$v.schoolmate}</td>
+              <td>{$v.grade}</td>
+              <if condition="$v.status eq 1">
+              <td>优</td>
+                <elseif condition="$v.status eq 2"/>
+                <td>良</td>
+                <elseif condition="$v.status eq 3"/>
+                <td>中</td>
+                <elseif condition="$v.status eq 4"/>
+                <td>差</td>
+                <elseif condition="$v.status eq 0"/>
+                <td>未评</td>
+              </if>
+              <td>{$v.addUp}</td>
+            </tr>
+          </foreach>
+            <tr>
+              <td colspan="7">{$page}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- 右侧核心区域 end -->
+<include file="./Apps/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script src="/Apps/Home/View/Tstudent/js/index.js"></script>
+
+

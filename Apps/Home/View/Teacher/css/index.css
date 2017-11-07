@@ -1,0 +1,66 @@
+.estimatedetails table{
+  text-align: center;
+  font-size: 18px;
+  letter-spacing: 3px;
+}
+.estimatedetails table a{
+  color: #FCFAF2;
+  text-decoration:none;
+}
+.estimatedetails table a:hover{
+  color: #F17C67;
+}
+.estimatedetails table tr{
+  border: 3px solid #FCFAF2;
+}
+.estimatedetails table tr th{
+  border: 3px solid #FCFAF2;
+  text-align: center;
+  line-height: 30px;
+}
+.estimatedetails table tr td{
+  border: 3px solid #FCFAF2;
+  line-height: 30px;
+}
+
+.estimatetitle{
+  line-height: 30px;
+  font-size: 18px;
+  letter-spacing: 3px;
+}
+.estimatetitle span{
+  color: #F17C67;
+}
+.estimatetitle-center{
+  text-align: center;
+}
+
+.estimatetitle-right{
+  text-align: right;
+}
+.estimatetitle-right a{
+  text-decoration:none;
+}
+.estimatetitle-right a:hover{
+  color: #F17C67;
+}
+
+.synthesize img{
+  width: 30px;
+}
+.synthesize a{
+  color:red;
+}
+.badge{
+  background-color: #E83015;
+  position: absolute!important;
+}
+
+.modal-open{
+  overflow: auto;
+}
+
+
+
+
+

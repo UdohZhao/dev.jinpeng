@@ -1,0 +1,112 @@
+.meBcg{
+	background-image: url("/Apps/Wap/View/Sme/img/0.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	height: 130px;
+}
+.myName{
+	width: 90px;
+	height: 90px;
+	border-radius: 50%;
+	background:rgba(0,0,0,.5);
+	margin:0 auto;
+	margin-top: 20px;
+	text-align: center;
+}
+.myName a{
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 90px;
+}
+.ulList{
+	list-style: none;
+	padding-top: 20px;
+}
+.ulList li{
+	width: 35%;
+	border: 2px solid #f4c16f;
+	border-radius: 5px;
+	margin-left: 10%;
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.ulList li.exitLogin{
+	width: 80%;
+	margin-top: 100px;
+	height: 40px;
+	border: none;
+}
+.ulList li.exitLogin .btn{
+	width: 100%;
+	height: 40px;
+	font-size: 20px;
+	background-color: #f4c16f;
+	border: none;
+	font-weight: bold;
+}
+.ulList li a{
+	line-height: 30px;
+	color: #000;
+	font-size: 18px;
+}
+.ulList li a.historyR{
+	line-height: 60px;
+	color: #000;
+	font-size: 18px;
+}
+.pop-upBox{
+	width: 200px;
+	height: 180px;
+	position: fixed;
+	top: 30%;
+	left: 50%;
+	margin-left: -100px;
+	border: 2px solid #f4c16f;
+	border-radius: 5px;
+	background-color: #fff;
+	display: none;
+	text-align: center;
+	padding-top: 50px;
+}
+strong{
+	font-size: 18px;
+	line-height: 30px;
+}
+.pop-upBox>a{
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+	background-color: #f4c16f;
+	color: #000;
+	font-size: 16px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 5px;
+	margin: 10px 10px;
+	font-weight: 700;
+}
+.weui-dialog__ft{
+	display: block;
+	margin-top: 20px;
+	line-height: 30px;
+	font-size: 18px;
+	color: #000;
+	
+}
+.weui-dialog__ft:after{
+	border: none;
+}
+.weui-dialog__ft a{
+	width: 48%;
+	text-align: center;
+	color: #000;
+	display: inline-block;
+	background-color: #f4c16f;
+	border-radius: 5px;
+}
+.weui-dialog .weui-dialog__btn.default{
+	color: #000;
+	margin-right: 4%;
+}

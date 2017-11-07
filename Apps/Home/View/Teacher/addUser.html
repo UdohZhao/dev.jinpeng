@@ -1,0 +1,56 @@
+<include file="./Apps/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Teacher/css/addUser.css">
+<!-- 右侧核心内容 start -->
+
+<div class="row adduser_page">
+    <p>{$classInfo.pname}{$classInfo.cname}</p><br/>
+    <p>{$classInfo.name}老师</p><br/>
+    <div class="my_adduser">
+        学生姓名:<input style="color:#000;" id="un" name="username" value=""/><br/><br/>
+        学生账号:<input style="color:#000;" id="uns" name="user" value=""/><br/><br/>
+        初始密码:<input style="color:#000;" id="up" type="password" name="password" value=""/><br/><br/>
+        <button id="bt">提交</button>
+    </div>
+</div>
+<!-- 右侧核心区域 end -->
+<include file="./Apps/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script src="/Apps/Home/View/Layouts/js/common.js"></script>
+
+<script>
+
+    $(function(){
+        $('#bt').click(function(){
+            //学生姓名
+            var name=$('#un').val().replace(/\s/g, "");
+            var pwd=$('#up').val().replace(/\s/g, "");
+            //学生账号
+            var uns=$('#uns').val().replace(/\s/g, "");
+            if(!name || !pwd){
+                layer.msg('不能为空')
+                return false;
+            }
+            $.ajax({
+                url:'__APP__/Teacher/userSave',
+                data:{
+                    name:name,
+                    password:pwd,
+                    cid:'{$classInfo.id}',
+                    username:uns
+                },
+                dataType:'json',
+                type:'post',
+                success:function(re){
+                        if(re===true){
+                            layer.msg('添加成功',{icon:1,time:1000},function(){
+                                location.reload()
+                            })
+                        }else if(re.info==4){
+                            layer.msg(re.msg,{icon:2,time:2000})
+                        }
+                }
+            })
+        })
+    })
+</script>

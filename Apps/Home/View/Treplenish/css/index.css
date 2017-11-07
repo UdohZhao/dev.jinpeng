@@ -1,0 +1,25 @@
+.classtitle{
+  padding: 20px;
+  font-size: 20px;
+  letter-spacing: 3px;
+}
+.classcontent{
+  padding: 20px;
+  height: 400px;
+  letter-spacing: 3px;
+}
+.replenishcontent{
+  height: 400px;
+  overflow:hidden;
+}
+.replenishfm{
+  border-left: 2px solid #E83015;
+  text-align: center;
+}
+.replenishfm-ul li{
+  padding: 10px;
+}
+.replenishfm-ul li a img{
+  width: 40px;
+}
+

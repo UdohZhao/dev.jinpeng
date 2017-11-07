@@ -1,0 +1,70 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/SSupplementaryq/css/index.css">
+
+	<!-- 内容主体 start-->
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 content">
+				<form action="__APP__/SSupplementaryq/supplement" method="post">
+					<if condition="$data.info eq 2">
+						<strong class="strong">补充题:</strong>
+						<div style="clear: both;"></div>
+						<div style="text-align: left;">{$data.msg}</div>
+					<else/>
+					<strong class="strong">补充题:</strong>
+					<div style="clear: both;"></div>
+					<textarea  cols="50" name="content" rows="5" id="textarea" placeholder="补充题只能提交一次哦！">{$data.content}</textarea>
+					</if>
+						<p id="submit">提&nbsp;交</p>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- 内容主体 end-->
+	<!-- 提交成功 弹出框 start-->
+    <div class="pop-upBox">
+      <img src="/Apps/Wap/View/Student/img/开心-1.png"><br />
+      <a>提交成功！<br />继续努力哦！</a>
+    </div>
+    <!-- 提交成功 end-->
+<include file="Layouts/footer1" />
+<!-- 提交弹出框 -->
+<script type="text/javascript">
+	$(".btnSubmit").click(function(){
+		$.modal({
+		  title: "<img src='/Apps/Wap/View/Layouts/img/开心-1.png' />",
+		  text: "提交成功！<br />"
+		},function(){
+			setTimeout(function(){
+				window.location.href='/Wap/Student/index';//跳转地址位置
+			},2000);
+		});
+	})
+	if('{$data}'){
+		$("#textarea").attr('readonly',"")
+		$("#submit").hide();
+	}
+	$(function(){
+		var obj=document.getElementById("textarea");
+
+		$("#submit").click(function(){
+
+			$.ajax({
+				url:'__APP__/SSupplementaryq/supplement',
+				data:"content="+obj.value,
+				dataType:'json',
+				type:'post',
+				success:function(re){
+					if(re.info==1){
+						alert(re.msg);
+						window.location.reload();
+					}else if(re.info==0){
+						alert(re.msg);
+					}
+				}
+			});
+		})
+	})
+</script>
+

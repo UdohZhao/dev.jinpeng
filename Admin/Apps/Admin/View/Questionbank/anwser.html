@@ -1,0 +1,43 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title"># 题库管理</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">备选答案</h3>
+            </div>
+            <div class="panel-body">
+
+
+                    <form id="questionbankForm" class="form-horizontal" action="__APP__/Questionbank/answerSave" method="post">
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">备选答案</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="answer_str" placeholder="请输入备选试题备选答案，多个备选答案以英文逗号分割。标准格式：很满意,满意,一般,较差 " onkeyup="JavaScript:this.value=this.value.replace(/，/ig,',');" value="{$dataQb.keyss}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-2 control-label">备选答案分数</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="val_str" placeholder="请输入备选试题备选答案分数，和备选答案一一对应，以英文逗号分割。标准格式：5,3,2,0 " onkeyup="JavaScript:this.value=this.value.replace(/，/ig,',');" value="{$dataQb.valss}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">提 交</button>
+                            </div>
+                        </div>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script src="/Admin/Apps/Admin/View/Questionbank/js/index.js"></script>

@@ -1,0 +1,114 @@
+<?php
+namespace Home\Controller;
+use Think\Controller;
+class LoginController extends Controller {
+    public $id;
+    public $db;
+    // 构造方法
+    public function _initialize(){
+      // uid
+      if( $_SESSION['userinfo']['uid'] ){
+        // type
+        if( $_SESSION['userinfo']['type'] == 1 ){
+          header('Location:'.U('Teacher/index'));
+        }else{
+          header('Location:'.U('Student/index'));
+        }
+      }
+      $this->id = intval($_GET['id']);
+      $this->db = M('user');
+
+        $info=M("site")->order("id desc")->find();
+
+        $this->assign('info',$info);
+    }
+    // 预加载
+    public function loading(){
+      // GET
+      if( IS_GET === true ){
+        // display
+        $this->display();
+        die;
+      }
+    }
+    // 登录页面
+    public function index(){
+
+      // GET
+      if( IS_GET === true ){
+        // display
+        $this->display();
+        die;
+      }
+
+      $data = $this->getData();
+      // 查询是否为注册用户
+      $username = $data['username'];
+      $password = $data['password'];
+      $userinfo = $this->db->where("username='$username' AND password='$password'")->find();
+      if( $userinfo ){
+        // status 0=>正常，1=>冻结
+        if( $userinfo['status'] == 1 ){
+          echo alert('该用户名已被冻结,请自行联系管理员!',__APP__.'/Login/loading',5);
+          die;
+        }
+        // 用户信息存入session
+        $_SESSION['userinfo']['uid'] = $userinfo['id'];
+        $_SESSION['userinfo']['status'] = $userinfo['status'];
+        $_SESSION['userinfo']['type'] = $userinfo['type'];
+        $_SESSION['userinfo']['username'] = $username;
+        $_SESSION['userinfo']['password'] = $password;
+        // type 0=>学生，1=>教师
+        if( $userinfo['type'] == 1 ){
+          header("Location:".U('Teacher/index'));
+        }else{
+          header("Location:".U('Student/index'));
+        }
+      }else{
+        echo alert('用户名或者密码错误!',__APP__.'/Login/loading',5);
+
+        die;
+      }
+    }
+    // 初始化数据
+    private function getData(){
+      $data = array();
+      $data['username'] = I('post.username','','strip_tags,htmlspecialchars');
+      $data['password'] = I('post.password','','strip_tags,htmlspecialchars');
+      $data['password'] = invincibleEncrypt($data['password']);
+      return $data;
+    }
+    // 测试视频背景
+    public function demoVideo(){
+      // display
+      $this->display();
+    }
+    // 退出
+    public function logout(){
+      // 销毁所有session
+      session('[destroy]');
+      header('Location:'.U('Login/loading'));
+    }
+
+    //验证码
+    public function verifyCode(){
+        // GET
+        if( IS_GET === true ){
+
+            ob_clean();
+            $Verify =     new \Think\Verify();
+            $Verify->fontSize = 30;
+            $Verify->length   = 4;
+            $Verify->useNoise = false;
+            $Verify->entry();
+            die;
+        }
+        // 核对验证码
+        if(check_verify($_POST['code'])){
+            $this->ajaxReturn(true);
+        }else{
+            $this->ajaxReturn(false);
+        }
+    }
+
+}

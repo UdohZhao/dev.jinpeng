@@ -1,0 +1,67 @@
+.bckImg{
+	background-image: url("/Apps/Wap/View/Signin/img/修改密码2.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	padding-top: 10%;
+}
+.logo{
+	width: 45%;
+	margin-bottom: 30px;
+}
+.selects{
+	width: 49%;
+	height: 40px;
+	border-radius: 5px;
+	border: none;
+}
+#cid{
+	float: left;
+	border: 1px solid #f4c16f;
+}
+#scid{
+	float: right;
+	border: 1px solid #f4c16f;
+}
+.form-group{
+	position: relative;
+	margin: 10px auto;
+	height: 40px;
+}
+.form-group span{
+	position: absolute;
+	top: 6px;
+	left: 10px;
+	color: #a2a2a3;
+}
+.form-control{
+	height: 40px;
+	padding-left: 40px;
+	border: 1px solid #f4c16f;
+}
+.btnSignin{
+	width: 100%;
+	height: 40px;
+	background-color: #f4c16f;
+	color: #000;
+	border: none;
+	font-size: 20px;
+	font-weight: bold;
+	letter-spacing: 4px;
+}
+.weui-dialog--visible .weui-dialog__ft{
+	display: none;
+}
+.goLogin{
+	font-size: 14px;
+	font-weight: bolder;
+	color: #fff;
+	margin-top: 5px;
+	letter-spacing: 2px;
+}
+.goLogin a{
+	text-decoration: none;
+}

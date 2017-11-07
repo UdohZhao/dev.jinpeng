@@ -1,0 +1,102 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+  <!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title"># 评价管理</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">综合评价配置</h3>
+        </div>
+        <div class="panel-body">
+          <form id="synthesisForm" class="form-horizontal" action="__APP__/Estimateconfig/index" method="post">
+          <input type="hidden" name="type" value="0"/>
+          <input type="hidden" name="id" value="{$synthesis.id}"/>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">优</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="y" placeholder="请输入评优百分比，例如：5" value="{$synthesis.y}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">良</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="l" placeholder="请输入评良百分比，例如：5" value="{$synthesis.l}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">中</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="z" placeholder="请输入评中百分比，例如：5" value="{$synthesis.z}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">差</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="c" placeholder="请输入评差百分比，例如：5" value="{$synthesis.c}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-3">
+                <button type="submit" class="btn btn-default">提 交</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">补充评价配置</h3>
+        </div>
+        <div class="panel-body">
+            <form id="replenishForm" class="form-horizontal" action="__APP__/Estimateconfig/index" method="post">
+            <input type="hidden" name="type" value="1"/>
+            <input type="hidden" name="id" value="{$replenish.id}"/>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">优</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="y" placeholder="请输入评优百分比，例如：5" value="{$replenish.y}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">良</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="l" placeholder="请输入评良百分比，例如：5" value="{$replenish.l}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">中</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="z" placeholder="请输入评中百分比，例如：5" value="{$replenish.z}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">差</label>
+              <div class="col-sm-3">
+                <input type="text" class="form-control" name="c" placeholder="请输入评差百分比，例如：5" value="{$replenish.c}">
+              </div>
+              <label for="inputEmail3" class="col-sm-0 control-label">%（单位）</label>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-3">
+                <button type="submit" class="btn btn-default">提 交</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script src="/Admin/Apps/Admin/View/Estimateconfig/js/index.js"></script>

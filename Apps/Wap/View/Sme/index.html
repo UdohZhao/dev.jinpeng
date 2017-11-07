@@ -1,0 +1,70 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Sme/css/index.css">
+	<!-- 内容主体 start-->
+	<div class="container-fluid meBcg">
+		<div class="container">
+			<div class="myName">
+				<if condition="$name.type eq 1">
+					<a>{$name.name}</a>
+					<else/>
+					<a>{$Think.session.userinfo.name}</a>
+				</if>
+
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<ul class="ulList">
+			<li>
+				<a>{$Think.session.userinfo.Pclass}</a><br/>
+				<a>{$Think.session.userinfo.class}</a>
+			</li>
+			<if condition="(!$teacherModel)">
+				<!-- <li>
+					<a>本年得分</a><br />
+					<a>{$Scoreyear}分</a>
+				</li> -->
+				<li>
+					<if condition="$period.status eq 2 && $Scoreyear.status neq 0">
+							
+								<a>本期得分</a><br />
+								<a>{$Scoreyear.grade}分</a>
+					<elseif condition="$period.status eq 2 && $Scoreyear.status eq 0"/>		
+								<a>本期得分</a><br />
+								<a>待评</a>
+					
+						<else/>
+						<a>近期得分</a><br />
+						<a>{$Scoreyear}分</a>
+					</if>
+				</li>
+				<li>
+					<a>总得分</a><br />
+					<a>{$ScoreAll}分</a>
+				</li>
+				<li>
+					<a href="/Wap/Shistorycycle/index/uid/{$Think.session.userinfo.uid}" class="historyR">历史得分</a>
+				</li>
+				 <else/>
+				 <li>
+					<a href="/Wap/Sthecycle/index/uid/{$Think.session.userinfo.uid}" class="historyR">历史周期</a>
+				</li>
+			</if>
+				
+			<li class="exitLogin">
+				<button class="btn btn-default">退出登录</button>
+			</li>
+		</ul>
+	</div>
+	<!-- 内容主体 end-->
+<!-- 底部菜单 -->
+<if condition="($teacherModel)">
+	<include file="Layouts/Tmenu" />  <!--老师底部-->
+	<else/>
+	<include file="Layouts/menu" />
+</if>
+
+<include file="Layouts/footer" />
+<!-- 当前页面 js -->
+<script type="text/javascript" src="/Apps/Wap/View/Sme/js/index.js"></script>

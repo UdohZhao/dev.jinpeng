@@ -1,0 +1,98 @@
+.topName{
+	margin-top: 10px;
+	border-bottom: 1px solid #bbbbbb;
+}
+.topName .supplementQ{
+	text-align: left;
+}
+.supplementQ span{
+	line-height: 30px;
+	font-size: 16px;
+	font-weight: bolder;
+}
+.supplementTime{
+	text-align: right;
+}
+.supplementTime span{
+	line-height: 30px;
+}
+.contentWords{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+.contentWords span{
+	display: block;
+	text-indent: 2em;
+	text-align: left;
+}
+.rightMove{
+	margin-left: -2.5px;
+}
+.rightMove a{
+	display: block;
+	position: relative;
+}
+.rightMove a img{
+	width: 75%;
+}
+.rightMove a span{
+	position: absolute;
+	top: -19px;
+	right: -10px;
+	color: #e7493c;
+}
+.rightMove a b{
+	position: absolute;
+	top: -15px;
+	right: -3px;
+	color: #fff;
+}
+.weui-dialog__bd{
+	position: relative;
+	margin-top: 20px;
+}
+.weui-dialog__bd img{
+	width: 25%;
+}
+.weui-dialog__bd span{
+	position: absolute;
+	top: -17px;
+	right: 34%;
+	color: #e7493c;
+}
+.weui-dialog__bd b{
+	position: absolute;
+	top: -10px;
+	right: 37%;
+	color: #fff;
+}
+.weui-dialog__ft{
+	display: block;
+	margin-top: 20px;
+	line-height: 30px;
+	font-size: 18px;
+	color: #000;
+	
+}
+.weui-dialog__ft:after{
+	border: none;
+}
+.weui-dialog__ft a{
+	width: 48%;
+	text-align: center;
+	color: #000;
+	display: inline-block;
+	background-color: #f4c16f;
+	border-radius: 5px;
+}
+.weui-dialog .weui-dialog__btn.default{
+	color: #000;
+	margin-left: 4%;
+}
+.evaluationAfter a img{
+	width: 20%;
+}
+.studentName{
+	text-align: left;
+	font-size: 16px;
+}

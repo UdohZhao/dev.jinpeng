@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>学生界面</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 当前页面CSS -->
+    <link rel="stylesheet" type="text/css" href="/Apps/Home/View/Student/css/overallRatings.css">
+    <link rel="stylesheet" type="text/css" href="/Apps/Home/View/Student/css/supplementaryQuestion.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="row back_img">
+        <div class="col-md-12"></div>
+      </div>
+      <div class="row content">
+        <div class="col-md-12">
+          <p style="font-size: 18px; font-weight: bold;">补充题：</p>
+        </div>
+
+        <form role="form" id="frm" action="__APP__/Student/supplement" method="post">
+          <div class="form-group">
+            <label for="name">补充内容</label>
+            <textarea id="tex" name="content" class="form-control" placeholder="补充题只能提交一次哦！" style="resize: none; height: 200px; opacity: .8;" rows="3">{$data.content}</textarea>
+          </div>
+
+          <div class="col-md-2">
+            <input type="submit" id="bt" class="btn btn-defalt" value="提交"/>
+          </div>
+        </form>
+
+
+      </div>
+    </div>
+
+<p id="p"></p>
+
+    <!-- Bootstrap -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/selfEvaluation.js"></script>
+  </body>
+</html>
+<script>
+    if('{$data}'){
+      $(function () {
+        $("#bt").hide();
+        $("#tex").attr("readonly","");
+      })
+    }
+</script>

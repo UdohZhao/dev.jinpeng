@@ -1,0 +1,73 @@
+    <include file="./Public/Bootstrap/header.html" />
+    <!-- 当前页面CSS -->
+    <link rel="stylesheet" type="text/css" href="/Apps/Home/View/Student/css/overallRatings.css">
+    <style type="text/css">
+      .bian{
+        height: 0;
+      }
+    </style>
+    <include file="./Apps/Home/View/Stucommon/evaluationheader.html" />
+
+
+      
+        <div class="row" style="position: relative; margin-top: 30px;">
+          <div class="col-sm-6 mountain_pic">
+            <div class="pictureBox">
+              <ul>
+                <li><img src="/Apps/Home/View/Student/img/水.png"></li>
+                <li><img src="/Apps/Home/View/Student/img/水.png"></li>
+              </ul>
+              <div class="aa"></div>
+            </div>
+            <div class="tu">
+              <img src="/Apps/Home/View/Student/img/山2.png">
+            </div>
+            <div class="wrapper">
+              <div class="counter col_fourth">
+                <div class="timer timer6">{$scoreAll}</div>
+                <div class="bian">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2 arrows">
+            <img src="/Apps/Home/View/Student/img/箭头.png">
+          </div>
+          <div class="col-sm-6 mountain_right">
+            <p>恭喜您总共获得了&nbsp;<span class="core">{$scoreAll}</span>&nbsp;分</p>
+            <p class="encourage">继续加油吧!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <include file="./Public/Bootstrap/footer.html" />
+    <!-- 当前页面js -->
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/selfEvaluation.js"></script>
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/totalScore.js"></script>
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/jquery.countUp.js"></script>
+    <script type="text/javascript">
+    <!--
+    //调用案例，需要在被调用的标签内 写上最终的数值
+    jQuery(function($) {
+        $(".timer").countTo({
+            lastSymbol:" ", //显示在最后的字符
+            from: 0,  // 开始时的数字
+            speed: 1000,  // 总时间
+            refreshInterval:100,  // 刷新一次的时间
+            beforeSize:0, //小数点前最小显示位数，不足的话用0代替 
+            decimals: 1,  // 小数点后的位数，小数做四舍五入
+            onUpdate: function() {
+            },  // 更新时回调函数
+            onComplete: function() {
+                for(i in arguments){
+                    //console.log(arguments[i]);
+                }
+            }
+        });
+    });
+    //-->
+
+    </script>

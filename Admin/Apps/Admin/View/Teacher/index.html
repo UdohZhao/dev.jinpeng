@@ -1,0 +1,73 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+  <!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title"># 教师管理</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">教师配置</h3>
+        </div>
+        <div class="panel-body">
+          <form <if condition="($data)">id="upteacherForm"<else/>id="teacherForm"</if> class="form-horizontal" action="__APP__/Teacher/index" method="post">
+          <input type="hidden" name="type" value="1"/>
+          <input type="hidden" name="uid" value="{$data.uid}"/>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">年级</label>
+              <div class="col-sm-2">
+                <select class="form-control" id="cid">
+                <foreach name="pdata" item="vo" key="k">
+                  <option value="{$vo.id}" <if condition="($pdata[$k]['id']) eq $data['pid']">selected</if> >{$vo.cname}</option>
+                </foreach>
+                </select>
+              </div>
+              <label for="inputEmail3" class="col-sm-2 control-label">班级</label>
+              <div class="col-sm-2">
+                <select class="form-control" name="cid" id="scid">
+                  <foreach name="sdata" item="vo" key="k">
+                    <option value="{$vo.id}" <if condition="($sdata[$k]['id']) eq $data['sid']">selected</if> >{$vo.cname}</option>
+                  </foreach>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">教师姓名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="name" placeholder="请输入教师姓名" value="{$data.name}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名" value="{$data.username}" <if condition="($data)">readonly="readonly"</if> >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">确认密码</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" name="confirmPassword" placeholder="请输入确认密码">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">提 交</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script src="/Admin/Apps/Admin/View/Teacher/js/index.js"></script>
+

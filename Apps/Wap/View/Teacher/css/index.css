@@ -1,0 +1,207 @@
+#list{
+	border-bottom: 1px solid #bbbbbb;
+}
+.scoreList{
+	border-top: 1px solid #bbbbbb;
+	background-color: #f3f1f1;
+	padding-top:10px;
+	padding-bottom: 6px;
+}
+.named{
+	width: 100%;
+	padding: 5px auto;
+	border: 2px solid #f4c16f;
+	border-radius: 6px;
+	position: relative;
+	background-color: #fff;
+}
+.named a{
+	text-decoration: none;
+	color: #000;
+	line-height: 40px;
+	font-size: 16px;
+
+}
+.redSqual{
+	background-color: #e7493c;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	font-size: 12px;
+	color: #fff;
+	position: absolute;
+	top: -7px;
+	right: -6px;
+	line-height: 15px;
+}
+.greySqual{
+	background-color: #ccc;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	font-size: 12px;
+	color: #fff;
+	position: absolute;
+	top: -7px;
+	right: -6px;
+	line-height: 15px;
+}
+.growthPoints a{
+	text-decoration: none;
+	color: #000;
+	line-height: 44px;
+	font-size: 16px;
+}
+.growthPoints a span{
+	color: #f4c16f;
+}
+.chioceImg{
+	padding-top: 8px;
+}
+.chioceImg a{
+	color: #f4c16f;
+	text-decoration: none;
+}
+table{
+	width: 100%;
+	margin-top: 5px;
+}
+table tr th{
+	font-weight: 300px;
+}
+table tr td{
+	line-height: 24px;
+}
+table tr td span{
+	color: #f4c16f;
+}
+.pop-upBox{
+	border: 2px solid #f4c16f;
+	border-radius: 8px;
+	padding: 0;
+	display: none;
+	background-color: #fff;
+	position: absolute;
+	top: 40%;
+}
+.pop-upBox b{
+	line-height: 30px;
+}
+.pop-upBox a{
+	text-align:center;
+	display: block;
+	width: 100%;
+	position: relative;
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+.pop-upBox a img{
+	width: 100%;
+}
+.pop-upBox a span{
+	position: absolute;
+	top: 2px;
+	right: -15px;
+	color: #e7493c;
+}
+.pop-upBox a b{
+	position: absolute;
+	top: 1px;
+	right: -8px;
+	color: #fff;
+}
+.rightMove{
+	margin-left: -2.5px;
+}
+.deleted{
+	text-align: right;
+	position: absolute;
+	top: 10px;
+	right: 0px;
+	display: none;
+}
+.deleted span{
+	color: #fff;
+}
+.scorelistDown .named{
+	border: 2px solid #e7493c;
+}
+.scorelistDown .growthPoints span{
+	color: #e7493c;
+	font-size: 14px;
+}
+.namePopbox{
+	background-color: #fff;
+	border-radius: 6px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	position: absolute;
+	top: 40%;
+	display: none;
+}
+.chioceBtn{
+	text-align: center;
+	border-radius: 6px;
+	border: 2px solid #f4c16f;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.chioceBtn a{
+	line-height: 40px;
+	font-size: 16px;
+	text-decoration: none;
+	color: #000;
+}
+.weui-dialog__ft{
+	display: block;
+}
+.weui-dialog__ft:after{
+	border: none;
+} 
+.weui-dialog__btn:after{
+	border: none;
+}
+.weui-dialog .weui-dialog__btn+.weui-dialog__btn:after, .weui-toast .weui-dialog__btn+.weui-dialog__btn:after{
+	border: none;
+}
+.weui-dialog__ft a{
+	display: block;
+	width: 90%;
+	border: 2px solid #f4c16f;
+	border-radius: 8px;
+	color: #000;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-left: 5%;
+}
+.weui-dialog__bd{
+	display: inline-block;
+	width: 100%;
+}
+.weui-dialog__ft{
+	height: auto;
+	min-height: 30px;
+	margin-top: 10px;
+}
+.weui-dialog__btn.default img{
+	width: 95%;
+}
+.weui-dialog__ft a.diffrent{
+	margin: 0;
+	border: none;
+	width: 25%;
+	display: inline-block;
+}
+.weui-dialog__ft a:last-child{
+	border: 2px solid #f4c16f;
+	width: 90%;
+	margin-top: 20px;
+	min-height: 30px;
+}
+.chioceImg img{
+	height: 100%;
+}
+.pages{
+	font-size: 14px;
+	padding: 10px 0;
+}

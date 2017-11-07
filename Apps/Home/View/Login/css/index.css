@@ -1,0 +1,144 @@
+    /* Base Styles */
+    body{ background-color: #000000; }
+
+      .covervid-wrapper {
+
+        position: absolute;
+
+          top: 0; left: 0;
+
+          width: 100%;
+
+          height: 100%;
+          margin-left: 0;
+
+      }
+
+      .github-link {
+
+        position: absolute;
+
+        top: 20px;
+
+        right: 20px;
+
+        opacity: 0.15;
+
+        -webkit-transition: 0.4s all ease;
+
+        -moz-transition: 0.4s all ease;
+
+        transition: 0.4s all ease;
+
+      }
+
+      .github-link:hover {
+
+        opacity: 0.4;
+
+      }
+
+    /*  .fd{ position: absolute; top: 48%; color: #FFFFFF; font-size: 40px; width: 100%; text-align: center; font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+      .fd p{font-size: 14px; }*/
+
+.container-fluid{
+  background-image: url('../img/login.jpg');
+  background-size:100% 100%;
+  -moz-background-size:100% 100%; /* 老版本的 Firefox */
+  background-repeat:no-repeat;
+}
+#loginModal .loginPage{
+ margin: 100px auto;
+ color: #FFFFFF;
+}
+.modal-content{
+background-color: rgba(0,0,0,0.5);
+}
+@media \0screen\,screen\9 {/* 只支持IE6、7、8 */
+  .modal-content{
+    background-color:#000000;
+    filter:Alpha(opacity=50);
+    position:static; /* IE6、7、8只能设置position:static(默认属性) ，否则会导致子元素继承Alpha值 */
+    *zoom:1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+  }
+  .loginPage{
+    position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值 */
+  }
+}
+#inputEmail3{
+  width: 300px;
+  height: 50px;
+  margin:0 auto;
+}
+#inputPassword3{
+  width: 300px;
+  height: 50px;
+  margin:0 auto;
+}
+.loginSchool{
+  text-align: center;
+  font-size:40px;
+  border:0px;
+  line-height: 100px;
+  letter-spacing:10px;
+}
+.loginSchool img{
+  width: 70%;
+}
+
+.loginTitle{
+  text-align: center;
+  font-size:25px;
+  border:0px;
+  letter-spacing:10px;
+}
+.loginTitle img{
+  width: 30%;
+}
+.login_button{
+  width: 300px;
+  height: 50px;
+  position: relative;
+  margin: 0 auto;
+}
+.loginBtn{
+  width: 300px;
+  height: 50px;
+  font-size:18px;
+  letter-spacing:10px;
+}
+.login_button>img{
+  position: absolute;
+  top: 0;
+  left: 105px;
+  height: 50px;
+  cursor: pointer;
+}
+.modal-footer{
+  text-align:center;
+  border:0px;
+}
+.yanzheng{
+  width: 300px;
+  margin: 0 auto;
+}
+#inputPassword4{
+  width: 160px;
+  height: 50px;
+  margin: 0 auto;
+  display: inline-block;
+}
+.inputPassword4_img{
+  height: 48px;
+  width: 136px;
+  margin-top: -3px;
+  cursor: pointer;
+}
+.form-horizontal .form-group{
+  text-align: center;
+}
+.inputPassword4_false{
+  color: red;
+}
+

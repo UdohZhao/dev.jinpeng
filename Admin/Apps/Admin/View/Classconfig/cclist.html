@@ -1,0 +1,64 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+  <!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title"># 班级管理</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">班级列表</h3>
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-pills">
+          <foreach name="pdata" item="vo" key="k">
+            <li role="presentation" <if condition="($pdata[$k]['id'] eq $id)">class="active"</if> ><a href="__APP__/Classconfig/cclist/id/{$vo.id}">{$vo.cname}</a></li>
+          </foreach>
+          </ul>
+          <p class="lead">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>班级排序</th>
+                  <th>班级名称</th>
+                  <th>班级负责人</th>
+                  <th>班级总人数</th>
+                  <th>班级总评分</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              <foreach name="sdata" item="vo">
+                <tr>
+                  <td></td>
+                  <td>{$vo.sort}</td>
+                  <td>{$vo.cname}</td>
+                  <td>{$vo.teacher}</td>
+                  <td>{$vo.student}</td>
+                  <td>{$vo.addup}</td>
+                  <td>
+                  <button type="button" class="btn btn-primary btn-xs" onclick="javascript:window.location.href='__APP__/Student/index/id/{$vo.id}'">进入班级</button>
+                  <eq name="vo.pid" value="6">
+                    <button type="button" class="btn btn-danger btn-xs" onclick="graduation({$vo.id});">毕业</button>
+                  <else/>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="javascript:window.location.href='__APP__/Classconfig/index/id/{$vo.id}'">升迁</button>
+                    <!-- <button type="button" class="btn btn-default btn-xs" onclick="del({$vo.id},{$vo.student},'{$vo.teacher}');">删除</button> -->
+                  </eq>
+                  </td>
+                </tr>
+              </foreach>
+              </tbody>
+
+            </table>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 验证表单 -->
+<script src="/Admin/Apps/Admin/View/Classconfig/js/cclist.js"></script>
+

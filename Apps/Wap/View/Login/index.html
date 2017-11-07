@@ -1,0 +1,94 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Login/css/index.css">
+
+	<!-- 内容主体 start-->
+	<div class="container bckImg">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12">
+				<img class="logo" src="/Apps/Wap/View/Login/img/logo.png">
+			</div>
+			<div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset1">
+				<form id="loginForm" action="__APP__/Login/index" method="post">
+					<div class="form-group">
+					  	<label class="sr-only" for="userName">Name</label>
+					   	<input type="text"  class="form-control" id="userName" placeholder="请输入用户名" name="username">
+					   	<span class="fa fa-user fa-2x"></span>
+					</div>
+					<div class="form-group">
+					    <label class="sr-only" for="keyWords">Email</label>
+					    <input type="password"  class="form-control" id="keyWords" placeholder="请输入密码" name="password">
+					   	<span class="fa fa-lock fa-2x"></span>
+					</div>
+					<div class="form-group verification_code">
+						<div class="code_left">
+							<label class="sr-only" for="keyWords">code</label>
+							<input type="text"  class="form-control" id="code" placeholder="验证码" name="code">
+							<span style="font-size: 26px;" class="fa fa-check-square fa-2x"></span>
+						</div>
+						<div class="code_right">
+							<img class="inputPassword4_img" src="__APP__/Login/verifyCode" onclick="this.src=this.src+'?'+Math.random();"/>
+						</div>
+					</div>
+					<button type="submit" id="bt" class="btn btn-default btnLogin">登&nbsp;录</button>
+					<p class="goSignin">还没有账号？<a href="/Wap/Signin/index">立即注册</a></p>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- 内容主体 end-->
+
+<include file="Layouts/footer" />
+
+<script type="text/javascript" src="/Apps/Wap/View/Layouts/js/bckImg.js"></script>
+<!-- 验证 -->
+<script type="text/javascript" src="/Apps/Wap/View/Login/js/index.js"></script>
+<!-- 登陆弹出框 -->
+<script src="/Public/Common/layer/layer.js"></script>
+<script type="text/javascript">
+	// $(".btnLogin").click(function(){
+	// 	$.modal({
+	// 	  title: "<img src='/Apps/Wap/View/Layouts/img/开心-1.png' />",
+	// 	  text: "登陆成功！<br />正在跳转"
+	// 	},function(){
+	// 		setTimeout(function(){
+	// 			window.location.href='/Wap/Student/index';//定时跳转到学生页面
+	// 		},2000);
+	// 	});
+	// })
+	$(".btnLogin").click(function(){
+		$(this).css({"background-color":"#f4c16f","color":"#000"});
+	})
+	
+</script>
+
+<script>
+	var isVerify='';
+	$('#bt').click(function(){
+		var verify = $('#code').val();
+		$.ajax({
+			url:'__APP__/Login/verifyCode',
+			data:'code='+verify,
+			dataType:'json',
+			type:'post',
+			cache:false,//无缓存
+			async:false,//同步掉用数据
+			success:function(re){
+				if(re==true){
+					//layer.msg('验证码成功',{ico:1,time:1000});
+					isVerify=true;
+				}else{
+					// layer.msg('验证码错误 ',{ico:2,time:1000});
+					//$(".inputPassword4_false").html("验证码错误");
+					layer.msg('验证码错误',{icon:2,time:1000})
+					isVerify=false;
+				}
+			}
+		})
+		if(!isVerify){
+			return false;
+		}
+	})
+
+</script>

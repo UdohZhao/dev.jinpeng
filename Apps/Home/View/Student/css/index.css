@@ -1,0 +1,157 @@
+a{
+	text-decoration: none;
+}
+.container-fluid{
+	background-image: url('/Apps/Home/View/Student/img/学生界面.png');
+	background-size: 100% 100%;
+	padding: 0;
+	margin: 0;
+}
+.row{
+	padding: 0;
+	margin: 0;
+	position: relative;
+}
+.cover{
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: .3;
+}
+.top_edit{
+	color: #fff;
+	margin:0;
+	line-height: 30px;
+}
+.top_edit>a{
+	color: #fff;
+	margin-left: 20px;
+	text-decoration: none;
+}
+.top_edit>span{
+	margin-left: 20px;
+}
+.content{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+.name_logo{
+	/*background-image: url("../img/学生标题.jpg");
+	background-size: 100% 100%;*/
+	height: 80px;
+}
+.name_logo>img{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height:100%;
+	opacity: .6;
+}
+.name_logo .col-md-5_right>img{
+	height: 60px;
+	margin-top: 10px;
+}
+.col-md-5_right{
+	text-align: right;
+}
+h1{
+	margin: 0;
+	letter-spacing:13px;
+}
+.col-md-5_left>img{
+	margin-top: 10px;
+}
+.left_menu{
+	background-size: 100% 100%;
+	height: 430px;
+	width: 229px;
+	position: relative;
+}
+.left_menu>img{
+	width: 100%;
+	height: 100%;
+	opacity: .8;
+}
+.left_menu>ul{
+	padding-top: 50px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding-left:30px;
+	padding-right: 30px;
+}
+.list-unstyled>li>span{
+	cursor: pointer;
+	font-size: 22px;
+}
+.list-unstyled>li>img{
+ 	-moz-transform:rotate(-90deg);
+    -webkit-transform:rotate(-90deg);
+    transform:rotate(-90deg);
+}
+.list-unstyled>li>.list-unstyled>li{
+	line-height: 35px;
+}
+.list-unstyled>li>.list-unstyled>li>a{
+	font-size: 18px;
+	color: #000;
+	text-decoration: none;
+	letter-spacing: 1px;
+}
+.ul_list{
+	display: none;
+	text-align: center;
+}
+.ul_one>li>img{
+	margin-left: 20px;
+	margin-top: -10px;
+}
+.password_cover{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,.5);
+	display: none;
+}
+
+iframe{
+	width: 100%;
+	height: 600px;
+}
+form{
+	margin-top: 15%;
+}
+.form-horizontal .form-group{
+	margin: 20px 0;
+}
+.btn_width{
+	background-color: #a69261;
+	width: 49%;
+	font-size: 20px;
+	color: #ffffff;
+	font-weight: bold;
+}
+.cancel{
+	background-color: #a69261;
+	width: 49%;
+	font-size: 20px;
+	color: #ffffff;
+	font-weight: bold;
+	margin-left: 2%;
+}
+.title_name h1{
+	text-align: center;
+	color: #ffffff;
+}
+#changePassword .my_change{
+	width: 70%;
+}

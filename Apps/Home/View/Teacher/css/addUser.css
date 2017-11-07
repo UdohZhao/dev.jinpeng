@@ -1,0 +1,21 @@
+.my_adduser{
+	margin: 0 auto;
+	width: 300px;
+	text-align: center;
+	font-size: 16px;
+}
+.my_adduser input{
+	margin-left: 20px;
+}
+.adduser_page>p{
+	margin-left: 20px;
+}
+#bt{
+	width: 75%;
+	background-color: #E83015;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	height: 32px;
+	letter-spacing: 10px;
+}

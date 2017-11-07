@@ -1,0 +1,156 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Tsupplement/css/index.css">
+
+	<!-- 内容主体 start-->
+	<div class="container">
+		<div class="row topName">
+			<div class="col-xs-12 col-sm-12 studentName">
+				<span>{$content.studentname}&nbsp;</span>
+			</div>
+			<div class="col-xs-6 col-sm-6 supplementQ">
+				<span>补充题：</span>
+			</div>
+			<div class="col-xs-6 col-sm-6 supplementTime">
+				<span>{$content.ctime|date="Y-m-d H:i:s",###}</span>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 contentWords">
+				<span>{$content.content}</span>
+			</div>
+
+			<div style="display: none;" id="divN">{$content.id}</div>
+			<div class="col-xs-12 col-sm-12">
+				<div class="row">
+					<if condition="$content.type eq 0">
+						<div class="col-xs-3 col-sm-3 rightMove">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3331.png">
+								<span style="display: none" class="fa fa-comment fa-2x"></span>
+								<b style="display: none">优</b>
+							</a>
+						</div>
+						<div class="col-xs-3 col-sm-3 rightMove">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3332.png">
+								 <span style="display: none"  class="fa fa-comment fa-2x"></span>
+								<b style="display: none" >良</b>
+							</a>
+						</div>
+						<div class="col-xs-3 col-sm-3 rightMove">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3333.png">
+								<span style="display: none"  class="fa fa-comment fa-2x"></span>
+								<b style="display: none" >中</b>
+							</a>
+						</div>
+						<div class="col-xs-3 col-sm-3 rightMove">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3334.png">
+								 <span style="display: none"  class="fa fa-comment fa-2x"></span>
+								<b style="display: none" >差</b>
+							</a>
+						</div>
+						<elseif condition="$content.status eq 1"/>
+						<div class="col-xs-12 col-sm-12 evaluationAfter">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3331.png">
+								<!-- <span style="display: none"  class="fa fa-comment fa-2x"></span>
+								<b style="display: none" >优</b> -->
+							</a>
+						</div>
+						<elseif condition="$content.status eq 1"/>
+						<div class="col-xs-12 col-sm-12 evaluationAfter">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3332.png">
+								<!-- <span class="fa fa-comment fa-2x"></span>
+								<b>优</b> -->
+							</a>
+						</div>
+						<elseif condition="$content.status eq 2"/>
+						<div class="col-xs-12 col-sm-12 evaluationAfter">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3333.png">
+								<!-- <span class="fa fa-comment fa-2x"></span>
+								<b>优</b> -->
+							</a>
+						</div>
+						<elseif condition="$content.status eq 1"/>
+						<div class="col-xs-12 col-sm-12 evaluationAfter">
+							<a href="#">
+								<img src="/Apps/Wap/View/Teacher/img/3334.png">
+								<!-- <span class="fa fa-comment fa-2x"></span>
+								<b>优</b> -->
+							</a>
+						</div>
+					</if>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 内容主体 end-->
+
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Wap/View/Tsupplement/js/index.js"></script>
+
+<script>
+	$(function(){
+		$(".rightMove").click(function(){
+			if($(this).children("a").children("b").html()=="优"){
+
+				var Evalutype="y";				//评价选择比例
+			}else if($(this).children("a").children("b").html()=="良"){
+				var Evalutype="l";
+			}else if($(this).children("a").children("b").html()=="中"){
+				var Evalutype="z";
+			}else if($(this).children("a").children("b").html()=="差"){
+				var Evalutype="c";
+			}
+			var type=1;				//评价类型,补充评价
+			var id=$("#divN").html();   //补充评论表id
+
+			var thisImg=$(this).html();
+			$.modal({
+				title: "您给出的评价如下",
+				text: thisImg,
+				buttons: [
+					{ text: "确定", onClick: function(){
+
+						$.ajax({
+							url:'__APP__/Tsupplement/calculate',
+							data:'id='+id+"&type="+type+"&Etype="+Evalutype,
+							dataType:'json',
+							type:'post',
+							success:function(re){
+
+								if(re.info==0){
+									alert("请先对该学生进行综合评分，再作补充");
+								}else if(re.info==1){
+									alert("补充评价成功，已重新计算分数");
+									window.location.href="__APP__/Teacher/index";
+								}else if(re.info==5){
+									alert(re.msg);
+								}
+							},
+							error:function(re){
+								alert("bad");
+							}
+						})
+
+
+						// window.location.href='Teacher/index';//跳转地址位置
+					} },
+					{ text: "取消", className: "default", onClick: function(){
+						$.closeModal();
+					} },
+				]
+			});
+		})
+	})
+
+
+</script>

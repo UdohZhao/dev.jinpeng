@@ -1,0 +1,973 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="/Apps/Wap/View/Student/css/index.css">
+
+  <!-- 每期历史记录上部分 start-->
+  <div class="container-fluid" id="historyGrade">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12">
+          <a>
+            <if condition="($teacherModel)">
+                学生姓名：{$studentBaseinfo.name}  第{$oldid}期
+              <elseif condition="($studentModel)"/>
+              学生姓名：{$studentBaseinfo.name}  第{$oldid}期
+            </if>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 每期历史记录上部分 end-->
+
+  <!-- 评价页 start-->
+  <div class="container" style="padding: 0 15px;">
+    <div class="row">
+      <!-- 答题内容 start-->
+      <div class="weui-tab" id='page-infinite-navbar'>
+        <div class="weui-navbar">
+          <a href='#tab1' class="weui-navbar__item weui-bar__item--on" id="tab11">
+            自我评价
+          </a>
+          <a href='#tab2' class="weui-navbar__item" id="tab22">
+            家长评价
+          </a>
+          <a href='#tab3' class="weui-navbar__item" id="tab33">
+            同学评价
+          </a>
+          <if condition="(!$teacherModel)">
+          <a href='#tab4' class="weui-navbar__item" id="allScore">
+            综合评价
+          </a>
+          </if>
+        </div>
+        <div class="weui-tab__bd">
+          <!--家长类型-->
+
+              <if condition="($data0)">  <!--未作答-->
+              <div id="tab1" class="weui-tab__bd-item infinite weui-tab__bd-item--active">
+                <form id="frm1" action="__APP__/Student/saveAnswer" method="post">
+                  <input type="hidden" name="types" value="{$type0}"/>
+                  <input type="hidden" name="periods" value="{$period.id}"/>
+                <div class="content-padded">
+                  <div class="container list">
+                    <!-- 循环体 start-->
+                  <foreach name="data0" key="k" item="vo">
+                    <div class="row theTitle">
+                      <div class="col-xs-2 col-sm-1 titleNum">
+                        <span>#{$vo.sort}</span>
+                        <input type="hidden" name="id[]" value="{$vo.id}">
+                      </div>
+                      <div class="col-xs-10 col-sm-11 theTitle-list">
+                        <p class="titleContent">{$vo.test_questions}</p>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 answers">
+                        <!--单选遍历-->
+                        <if condition="$vo.nature eq 0">
+
+                        <ul class="list-inline">
+                          <script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>
+                          <foreach name="vo.keyss" item="v" key="k">
+                            <li>
+                              <a class="answersK single" onclick="javascript:seleOnly(this.parentNode.parentNode.nextElementSibling,'{$vo.id}','{$v}')">
+                                <img src="/Apps/Wap/View/Student/img/勾1.png">
+                              </a>
+                              <p>{$v}</p>
+                            </li><input type="hidden" value=""/>
+                          </foreach>
+                        </ul><input type="hidden" value=""/>
+                          <else/>
+                          <!--多选遍历-->
+                              <ul class="list-inline">
+                                <foreach name="vo.keyss" item="v" key="k">
+                                  <li>
+                                    <a class="answersK" onclick="javascript:sele(this.parentNode.nextElementSibling,'{$vo.id}','{$v}','{$k}')">
+                                      <img name="dob{$vo.id}" src="/Apps/Wap/View/Student/img/勾1.png">
+                                    </a>
+                                    <p>{$v}</p>
+                                  </li><input type="hidden" value=""/>
+                                </foreach>
+                              </ul>
+                          </if>
+                      </div>
+                    </div>
+                  </foreach>
+
+                  </div>
+                </div>
+                <!--<div class="weui-loadmore">
+                  <i class="weui-loading"></i>
+                  <span class="weui-loadmore__tips">正在加载</span>
+                </div>-->
+                <!-- 答案提交按钮 start-->
+                <div class="btnSubmit" id="dbt1">
+                  <div class="col-xs-12 col-sm-12">
+                    <a id="bt1" class="evaluationSubmit">提交</a>
+                  </div>
+                </div>
+                <!-- 答案提交按钮 end-->
+              </form>
+              </div>
+                <elseif condition="(!$period)"/>
+                <div id="tab1" class="weui-tab__bd-item infinite weui-tab__bd-item--active">
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      暂无正在测评的周期
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                </div>
+                <elseif condition="($Pquestion)"/>
+                <div id="tab1" class="weui-tab__bd-item infinite weui-tab__bd-item--active">
+
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      <foreach name="Pquestion" key="k" item="vo">
+                        <div class="row theTitle">
+                          <div class="col-xs-2 col-sm-1 titleNum">
+                            <span>#{$vo.sort}</span>
+
+                          </div>
+                          <div class="col-xs-10 col-sm-11 theTitle-list">
+                            <p class="titleContent">{$vo.test_questions}</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 answers">
+                            <!--单选遍历-->
+                            <ul class="list-inline">
+                              <!--<script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>-->
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" name="question">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <input type="hidden" value="{$vo.selStatus.$k.0}"/><p>{$v}<span style="font-size: 10px;color: #1b1b1b">({$vo.valss.$k})分</span></p>
+                                </li>
+                              </foreach>
+                            </ul><span>得分：{$vo.finalScore}分</span>
+                          </div>
+                        </div>
+                      </foreach>
+
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                </div>
+              <else/>
+              <div id="tab1" class="weui-tab__bd-item infinite weui-tab__bd-item--active">
+
+
+                <div class="content-padded">
+                  <div class="container list">
+                    <!-- 循环体 start-->
+                  <foreach name="question" key="k" item="vo">
+                    <div class="row theTitle">
+                      <div class="col-xs-2 col-sm-1 titleNum">
+                        <span>#{$vo.sort}</span>
+
+                      </div>
+                      <div class="col-xs-10 col-sm-11 theTitle-list">
+                        <p class="titleContent">{$vo.test_questions}</p>
+                      </div>
+                      <div class="col-xs-12 col-sm-12 answers">
+                        <!--单选遍历-->
+                        <ul class="list-inline">
+                          <!--<script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>-->
+                          <foreach name="vo.keyss" item="v" key="k">
+                            <li>
+                              <a class="answersK single" name="question">
+                                <img src="/Apps/Wap/View/Student/img/勾1.png">
+                              </a>
+                              <input type="hidden" value="{$vo.selStatus.$k.0}"/><p>{$v}</p>
+                            </li>
+                          </foreach>
+                        </ul>
+                      </div>
+                    </div>
+                  </foreach>
+
+                  </div>
+                </div>
+                <!--<div class="weui-loadmore">
+                  <i class="weui-loading"></i>
+                  <span class="weui-loadmore__tips">正在加载</span>
+                </div>-->
+                <!-- 答案提交按钮 start-->
+                <div class="btnSubmit" id="dbt1">
+                  <div class="col-xs-12 col-sm-12">
+                    <a id="bt1" class="evaluationSubmit">提交</a>
+                  </div>
+                </div>
+                <!-- 答案提交按钮 end-->
+
+              </div>
+              </if>
+              <!--自我类型-->
+              <if condition="($data1)">   <!--未作答-->
+              <div id="tab2" class="weui-tab__bd-item infinite">
+                <form id="frm2" action="__APP__/Student/saveAnswer" method="post">
+                  <input type="hidden" name="types" value="{$type1}"/>
+                  <input type="hidden" name="periods" value="{$period.id}"/>
+                <div class="content-padded">
+                  <div class="container list">
+                    <!-- 循环体 start-->
+                    <foreach name="data1" key="k" item="vo">
+                      <div class="row theTitle">
+                        <div class="col-xs-2 col-sm-1 titleNum">
+                          <span>#{$vo.sort}</span>
+                          <input type="hidden" name="id[]" value="{$vo.id}">
+                        </div>
+                        <div class="col-xs-10 col-sm-11 theTitle-list">
+                          <p class="titleContent">{$vo.test_questions}</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 answers">
+                          <!--单选遍历-->
+                          <if condition="$vo.nature eq 0">
+
+                            <ul class="list-inline">
+                              <script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" onclick="javascript:seleOnly(this.parentNode.parentNode.nextElementSibling,'{$vo.id}','{$v}')">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <p>{$v}</p>
+                                </li><input type="hidden" value=""/>
+                              </foreach>
+                            </ul><input type="hidden" value=""/>
+                            <else/>
+                            <!--多选遍历-->
+                            <ul class="list-inline">
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK" onclick="javascript:sele(this.parentNode.nextElementSibling,'{$vo.id}','{$v}','{$k}')">
+                                    <img name="dob{$vo.id}" src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <p>{$v}</p>
+                                </li><input type="hidden" value=""/>
+                            </foreach>
+                            </ul>
+                          </if>
+                        </div>
+                      </div>
+                    </foreach>
+                    <!-- 循环体 end-->
+
+                  </div>
+                </div>
+                <!-- 答案提交按钮 start-->
+                <div class="btnSubmit" id="dbt2">
+                  <div class="col-xs-12 col-sm-12">
+                    <a id="bt2" class="btn btn-default evaluationSubmit">提交</a>
+                  </div>
+                </div>
+                <!-- 答案提交按钮 end-->
+                  </form>
+              </div>
+                <elseif condition="(!$period)"/>
+                <div id="tab2" class="weui-tab__bd-item infinite">
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                     暂无正在测评的周期
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                </div>
+                <elseif condition="($Pquestion)"/>
+                <div id="tab2" class="weui-tab__bd-item infinite">
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      <foreach name="Pquestion1" key="k" item="vo">
+                        <div class="row theTitle">
+                          <div class="col-xs-2 col-sm-1 titleNum">
+                            <span>#{$vo.sort}</span>
+
+                          </div>
+                          <div class="col-xs-10 col-sm-11 theTitle-list">
+                            <p class="titleContent">{$vo.test_questions}</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 answers">
+                            <!--单选遍历-->
+                            <ul class="list-inline">
+                              <!--<script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>-->
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" name="question">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <input type="hidden" value="{$vo.selStatus.$k.0}"/><p>{$v}<span style="font-size: 10px;color: #1b1b1b">({$vo.valss.$k})分</span></p>
+                                </li>
+                              </foreach>
+                            </ul><span>得分：{$vo.finalScore}分</span>
+                          </div>
+                        </div>
+                      </foreach>
+
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                </div>
+                <else/>
+              <div id="tab2" class="weui-tab__bd-item infinite">
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      <foreach name="question1" key="k" item="vo">
+                        <div class="row theTitle">
+                          <div class="col-xs-2 col-sm-1 titleNum">
+                            <span>#{$vo.sort}</span>
+                          </div>
+                          <div class="col-xs-10 col-sm-11 theTitle-list">
+                            <p class="titleContent">{$vo.test_questions}</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 answers">
+                            <!--单选遍历-->
+                            <ul class="list-inline">
+                              <!--<script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>-->
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" name="question1">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <input type="hidden" value="{$vo.selStatus.$k.0}"/><p>{$v}</p>
+                                </li>
+                              </foreach>
+                            </ul>
+                          </div>
+                        </div>
+                      </foreach>
+
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                  <!-- 答案提交按钮 start-->
+                  <div class="btnSubmit" id="dbt2">
+                    <div class="col-xs-12 col-sm-12">
+                      <a id="bt2" class="evaluationSubmit">提交</a>
+                    </div>
+                  </div>
+                  <!-- 答案提交按钮 end-->
+
+              </div>
+              </if>
+              <!--同学类型-->
+              <if condition="($data2)">
+              <div id="tab3" class="weui-tab__bd-item infinite">
+               <form id="frm3" action="__APP__/Student/saveAnswer" method="post">
+                 <input type="hidden" name="types" value="{$type2}"/>
+                 <input type="hidden" name="periods" value="{$period.id}"/>
+                <div class="content-padded">
+                  <div class="container list">
+                    <!-- 循环体 start-->
+                    <foreach name="data2" key="k" item="vo">
+                      <div class="row theTitle">
+                        <div class="col-xs-2 col-sm-1 titleNum">
+                          <span>#{$vo.sort}</span>
+                          <input type="hidden" name="id[]" value="{$vo.id}">
+                        </div>
+                        <div class="col-xs-10 col-sm-11 theTitle-list">
+                          <p class="titleContent">{$vo.test_questions}</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 answers">
+                          <!--单选遍历-->
+                          <if condition="$vo.nature eq 0">
+
+                            <ul class="list-inline">
+                              <script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" onclick="javascript:seleOnly(this.parentNode.parentNode.nextElementSibling,'{$vo.id}','{$v}')">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <p>{$v}</p>
+                                </li><input type="hidden" value=""/>
+                              </foreach>
+                            </ul><input type="hidden" value=""/>
+                            <else/>
+                            <!--多选遍历-->
+                            <ul class="list-inline">
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK" onclick="javascript:sele(this.parentNode.nextElementSibling,'{$vo.id}','{$v}','{$k}')">
+                                    <img name="dob{$vo.id}" src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <p>{$v}</p>
+                                </li>
+                              </foreach>
+                            </ul>
+                          </if>
+                        </div>
+                      </div>
+                    </foreach>
+                    <!-- 循环体 end-->
+                  </div>
+
+                </div>
+                <!-- 答案提交按钮 start-->
+                <div class="btnSubmit" id="dbt3">
+                  <div class="col-xs-12 col-sm-12">
+                    <a id="bt3" class="btn btn-default evaluationSubmit">提交</a>
+                  </div>
+                </div>
+               </form>
+                <!-- 答案提交按钮 end-->
+              </div>
+                <elseif condition="(!$period)"/>
+                <div id="tab3" class="weui-tab__bd-item infinite">
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      暂无正在测评的周期
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                </div>
+                <elseif condition="($Pquestion)"/>
+                <div id="tab3" class="weui-tab__bd-item infinite">
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      <foreach name="Pquestion2" key="k" item="vo">
+                        <div class="row theTitle">
+                          <div class="col-xs-2 col-sm-1 titleNum">
+                            <span>#{$vo.sort}</span>
+
+                          </div>
+                          <div class="col-xs-10 col-sm-11 theTitle-list">
+                            <p class="titleContent">{$vo.test_questions}</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 answers">
+                            <!--单选遍历-->
+                            <ul class="list-inline">
+                              <!--<script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>-->
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" name="question">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <input type="hidden" value="{$vo.selStatus.$k.0}"/><p>{$v}<span style="font-size: 10px;color: #1b1b1b">({$vo.valss.$k})分</span></p>
+                                </li>
+                              </foreach>
+                            </ul><span>得分：{$vo.finalScore}分</span>
+                          </div>
+                        </div>
+                      </foreach>
+
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                </div>
+                <else/>
+              <div id="tab3" class="weui-tab__bd-item infinite">
+
+                  <div class="content-padded">
+                    <div class="container list">
+                      <!-- 循环体 start-->
+                      <foreach name="question2" key="k" item="vo">
+                        <div class="row theTitle">
+                          <div class="col-xs-2 col-sm-1 titleNum">
+                            <span>#{$vo.sort}</span>
+                          </div>
+                          <div class="col-xs-10 col-sm-11 theTitle-list">
+                            <p class="titleContent">{$vo.test_questions}</p>
+                          </div>
+                          <div class="col-xs-12 col-sm-12 answers">
+                            <!--单选遍历-->
+                            <ul class="list-inline">
+                              <!--<script type="text/javascript" src="/Apps/Wap/View/Student/js/tick.js"></script>-->
+                              <foreach name="vo.keyss" item="v" key="k">
+                                <li>
+                                  <a class="answersK single" name="question2">
+                                    <img src="/Apps/Wap/View/Student/img/勾1.png">
+                                  </a>
+                                  <input type="hidden" value="{$vo.selStatus.$k.0}"/><p>{$v}</p>
+                                </li>
+                              </foreach>
+                            </ul>
+                          </div>
+                        </div>
+                      </foreach>
+
+                    </div>
+                  </div>
+                  <!--<div class="weui-loadmore">
+                    <i class="weui-loading"></i>
+                    <span class="weui-loadmore__tips">正在加载</span>
+                  </div>-->
+                  <!-- 答案提交按钮 start-->
+                  <div class="btnSubmit" id="dbt3">
+                    <div class="col-xs-12 col-sm-12">
+                      <a id="bt3" class="evaluationSubmit">提交</a>
+                    </div>
+                  </div>
+                  <!-- 答案提交按钮 end-->
+              </div>
+              </if>
+
+          <div id="tab4" class="weui-tab__bd-item infinite" style="margin-top: 20px;">
+            <div class="content-padded">
+              <div class="container" style="padding-bottom: 10px;">
+                <div class="row" style="padding-right:15px;">
+                  <div class="col-xs-3 col-xs-offset-9 col-sm-3 col-sm-offset-9 question">
+                    <if condition="($oldid)">
+                      <a onclick="window.top.location='__APP__/SSupplementaryq/index/perid/{$perid}'" class="questionlist">补充题入口</a>
+                      <else/>
+                      <a onclick="window.top.location='__APP__/SSupplementaryq/index'" class="questionlist">补充题入口</a>
+                    </if>
+                  </div>
+                </div>
+                <div class="row" style="margin-top: 15px; position: relative;">
+                  <div class="col-xs-12 col-sm-12 mountain">
+                    <div class="pictureBox">
+                      <div class="ulBox">
+                        <ul class="nowHere">
+                          <li><img src="/Apps/Wap/View/Student/img/水.png"></li>
+                          <li><img src="/Apps/Wap/View/Student/img/水.png"></li>
+                        </ul>
+                      </div>
+                      <div class="aa"></div>
+                    </div>
+                    <div class="tu">
+                      <img src="/Apps/Wap/View/Student/img/山1.png">
+                    </div>
+                    <div class="wrapper">
+                      <div class="counter col_fourth" style="color: red; font-weight: bolder;">
+                        +<div class="timer timer6"></div>
+                        <div class="bian">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="div1" class="col-xs-12 col-sm-12" style="margin-top: 20px;">
+                    <a class="words">恭喜您本期获得&nbsp;<span id="perScore"></span>&nbsp;分</a>
+                  </div>
+                  <div class="col-xs-12 col-sm-12">
+                    <a class="words">继续努力哦！</a>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 wordsDown">
+                    <a class="words">本年累计获得&nbsp;<span id="yearScore"></span>&nbsp;分</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 答题内容 end-->
+    </div>
+    
+      
+
+
+    
+
+
+
+  </div>
+  <!-- 评价页 end-->
+  
+  <!-- 新注册用户 -->
+  <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="myLargeModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="gridSystemModalLabel">这位同学请问怎么称呼?</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="请输入你的姓名" name="name"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="bindName();" class="btn btn-primary">提交</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+    <!--历史得分进入 没数据时 start-->
+    <div class="noDatas" style="display: none;">
+      <div class="container">
+        <p>暂无数据</p>
+      </div>
+    </div>
+    <!-- 没数据时 end-->
+        
+<!-- 底部菜单 -->
+<if condition="($teacherModel)">
+ <include file="Layouts/Tmenu" />
+  <else/>
+  <include file="Layouts/menu" />
+</if>
+
+<include file="Layouts/footer" />
+<!-- 数字变化JS -->
+<script type="text/javascript" src="/Apps/Wap/View/Student/js/jquery.countUp.js"></script>
+<!-- 弹出层 js -->
+<script type="text/javascript" src="/Apps/Wap/View/Layouts/js/bckImg.js"></script>
+
+<script type="text/javascript">
+    
+
+    //判断是否为新注册用户
+    if( '{$Think.session.userinfo.name}' == 1 ){
+      $('#myLargeModalLabel').modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: true
+      });
+    }
+    // 绑定姓名
+    function bindName(){
+     var name = $("input[name='name']").val();
+      if( name == false ){
+        layer.alert('姓名不能为空!',{icon:5});
+      }else{
+        //询问框
+        layer.confirm('姓名提交成功后将不可更改，确认提交吗？', {
+          btn: ['确定','取消'] //按钮
+        }, function(){
+          // Ajax
+          $.ajax({
+            type: 'POST',
+            url: '__APP__/Student/bindName',
+            data: {name:name},
+            success: function(Msg){
+              // Msg
+              if( Msg == 1 ){
+                layer.msg('欢迎你，'+name+'同学',{icon:6});
+                setTimeout("window.location.href='__APP__/Student/index'",3000);
+              }else{
+                layer.alert('提交失败!',{icon:5});
+              }
+            },
+            dataType: 'JSON'
+          });
+          layer.closeAll();
+        }, function(){
+          layer.closeAll();
+        });
+      }
+    }
+</script>
+
+<!--IF(如果是查看历史得分) -->
+<!-- <script type="text/javascript">
+  $(".downMenu").hide();   // 隐藏底部菜单
+  $(".evaluationSubmit").hide(); //隐藏提交按钮
+  $(".downHeight").css("height","30px"); //内容到频幕底部隔出30高度的距离
+  $(".questionlist").hide(); //隐藏补充题入口按钮
+  $("#historyGrade a").html("第一期总共得分80分"); //历史记录中顶部总共得分
+  $("#historyGrade a").css({"color":"#000","font-size":"18px"});
+  $("#historyGrade").css({"padding":"5px 0","border-bottom":"1px solid #dedede"});
+</script> -->
+<!-- 如果是查看历史得分 -->
+<script>
+  //多选题控制
+  function sele(obj,val,v,k){   //val：选择题目ID     v：所选题目得分   k:每道题的选项对应的序号
+    var dobj=document.getElementsByName("dob"+val);//每一个题目对应的四个选项钩钩图标对象
+
+    if (dobj[k].style.display=="" || dobj[k].style.display=="none"){
+      obj.setAttribute("name",val+"[]");
+      obj.setAttribute("value",v);
+      dobj[k].style.display="block";
+    }else if(dobj[k].style.display=="block"){
+      obj.setAttribute("name","");
+      obj.setAttribute("value","");
+      dobj[k].style.display="none";
+    }
+  }
+  //单选题控制
+  function seleOnly(obj,val,v) {   //val：选择题目ID     v：所选题目得分
+
+    obj.setAttribute("name", val+"[]");
+    obj.setAttribute("value", v);
+  }
+</script>
+
+<script src="http://malsup.github.io/jquery.form.js"></script>
+<script>
+    $(function(){
+      $("#bt1").click(function(){
+
+        $("#frm1").ajaxSubmit(function(re){
+
+          if(re.info==3){       //未作答试题
+            alert(re.msg);
+          }else if(re.info==2){
+            alert(re.msg);
+          }else if(re.info==1){  //所有试题答完
+            alert(re.msg);
+            $("#dbt1").hide();
+            window.location.href='__APP__/Student/index';
+          }else if(re.info==0){
+            alert(re.msg);
+            $("#tab"+re.new+re.new).addClass("weui-bar__item--on");
+            $("#tab"+re.old+re.old).removeClass("weui-bar__item--on");
+            $("#tab"+re.new).addClass("weui-tab__bd-item--active");
+            $("#tab"+re.old).removeClass("weui-tab__bd-item--active");
+            $("#dbt1").hide();
+          }
+        });
+      });
+      $("#bt2").click(function(){
+
+        $("#frm2").ajaxSubmit(function(re){
+          if(re.info==3){       //未作答试题
+            alert(re.msg);
+          }else if(re.info==2){
+            alert(re.msg);
+          }else if(re.info==1){
+            alert(re.msg);
+            $("#dbt2").hide();
+            window.location.href='__APP__/Student/index';
+          }else if(re.info==0){
+            alert(re.msg);
+            if($("#dbt3").css("display")=="none"){
+              $("#tab11").addClass("weui-bar__item--on");
+              $("#tab22").removeClass("weui-bar__item--on");
+              $("#tab1").addClass("weui-tab__bd-item--active");
+              $("#tab2").removeClass("weui-tab__bd-item--active");
+              $("#dbt2").hide();
+            }else{
+              $("#tab"+re.new+re.new).addClass("weui-bar__item--on");
+              $("#tab"+re.old+re.old).removeClass("weui-bar__item--on");
+              $("#tab"+re.new).addClass("weui-tab__bd-item--active");
+              $("#tab"+re.old).removeClass("weui-tab__bd-item--active");
+              $("#dbt2").hide();
+            }
+
+          }
+        });
+      });
+      $("#bt3").click(function(){
+
+        $("#frm3").ajaxSubmit(function(re){
+          if(re.info==3){       //未作答试题
+            alert(re.msg);
+            /*$("#tab22").addClass("weui-bar__item--on");
+             $("#tab11").removeClass("weui-bar__item--on");
+             $("#tab2").addClass("weui-tab__bd-item--active")
+             $("#tab1").removeClass("weui-tab__bd-item--active")*/
+          }else if(re.info==2){
+            alert(re.msg);
+          }else if(re.info==1){
+            alert(re.msg);
+            $("#dbt3").hide();
+            window.location.href='__APP__/Student/index';
+          }else if(re.info==0){
+            alert(re.msg);
+              if($("#dbt1").css("display")=="none") {
+                $("#tab22").addClass("weui-bar__item--on");
+                $("#tab11").removeClass("weui-bar__item--on");
+                $("#tab2").addClass("weui-tab__bd-item--active");
+                $("#tab3").removeClass("weui-tab__bd-item--active");
+                $("#dbt3").hide();
+              }else{
+              $("#tab"+re.new+re.new).addClass("weui-bar__item--on");
+              $("#tab"+re.old+re.old).removeClass("weui-bar__item--on");
+              $("#tab"+re.new).addClass("weui-tab__bd-item--active");
+              $("#tab"+re.old).removeClass("weui-tab__bd-item--active");
+              $("#dbt3").hide();
+              }
+          }
+        });
+      });
+    })
+</script>
+
+<script>
+  var qobj=document.getElementsByName("question");
+
+  for(var i=0;i<qobj.length;i++){
+    if(qobj[i].nextSibling.nextSibling.getAttribute("value")==1){   //input输入框的value值
+      qobj[i].firstChild.nextSibling.style.display="block"; //img标签的样式 即是否显示钩
+    }
+
+  }
+  if('{$question}'){
+    $(function () {
+      $("#dbt1").hide();
+    })
+  }
+
+  var qobj=document.getElementsByName("question1");
+
+  for(var i=0;i<qobj.length;i++){
+    if(qobj[i].nextSibling.nextSibling.getAttribute("value")==1){   //input输入框的value值
+      qobj[i].firstChild.nextSibling.style.display="block"; //img标签的样式 即是否显示钩
+    }
+
+  }
+  if('{$question1}'){
+    $(function () {
+      $("#dbt2").hide();
+    })
+  }
+
+  var qobj=document.getElementsByName("question2");
+
+  for(var i=0;i<qobj.length;i++){
+    if(qobj[i].nextSibling.nextSibling.getAttribute("value")==1){   //input输入框的value值
+      qobj[i].firstChild.nextSibling.style.display="block"; //img标签的样式 即是否显示钩
+    }
+
+  }
+  if('{$question2}'){
+    $(function () {
+      $("#dbt3").hide();
+    })
+  }
+
+
+  if(!'{$period}'){
+    $("#bt1").hide()
+    $("#bt2").hide()
+    $("#bt3").hide()
+  }
+</script>
+
+<script>
+  $(function(){
+    if('{$Think.get.cid}' && '{$Think.get.pcid}' && '{$Think.get.perid}'){
+      var cid='{$Think.get.cid}';
+      var pcid='{$Think.get.pcid}';
+      var perid='{$Think.get.perid}';
+      var data0="cid="+cid+"&pcid="+pcid+"&perid="+perid;
+    }else{
+      var data0="";
+    }
+    $("#allScore").click(function(){
+      $.ajax({
+        url:'__APP__/Student/overallRatings',
+        dataType:'json',
+        type:'post',
+        data:data0,
+        success:function(re){
+
+          if(re.info==0){
+            alert("暂无正在进行测评的周期")
+            $("#div1").html("暂无正在进行测评的周期");
+          }else if(re.info==1){
+              if(re.totalScore==0.0){
+                $("#div1").html("老师还未评价，请等待");
+              }else{
+                $("#perScore").html(re.totalScore);
+                $("#yearScore").html(re.scoreAll);
+              }
+          }else if(re.info==2){
+            alert(re.msg);
+            window.location.href='__APP__/Student/index';
+          }else if(re.info==3){
+            alert(re.msg+"，请仔细检查");
+            window.location.href='__APP__/Student/index';
+          }
+          var core=re.totalScore;
+          var coreNum=parseInt(core);//本期得分
+          var historyScore=re.scoreAll;
+          var historyScoreNum=parseInt(historyScore);//历史总分
+          $(".timer6").html(re.totalScore);
+          // alert(jQuery.type($(".timer6").html(re.totalScore).toString()));
+
+          $(".aa").css("height",(historyScoreNum-coreNum)*0.15+6+"px");//初始高度
+          $(".bian").css("height",(historyScoreNum-coreNum)*0.15+"px");
+
+          var aaHeight=$(".aa").height();
+          if(aaHeight<300){
+            setTimeout(function(){
+              $(".ulBox").css("border-bottom","1px solid #358d20");
+            },2000);
+            setTimeout(function(){
+              $(".aa").css("height",historyScoreNum*0.15+6+"px");//增加得分*0.15倍高度
+              $(".bian").css("height",historyScoreNum*0.15+"px");
+            },1000);
+          }else if(aaHeight>=300&&aaHeight<320){
+            $(".ulBox").css("border-bottom","1px solid #358d20");
+            $(".aa").css("height",historyScoreNum*0.15+6+"px");
+            $(".bian").css("height",historyScoreNum*0.15+"px");
+            $(".aa").css("transition","none");
+            $(".bian").css("transition","none");
+          }else{
+            $(".aa").css("height","330px");
+            $(".bian").css("height","323px");
+            $(".aa").css("transition","none");
+            $(".bian").css("transition","none");
+          };
+          $("#tab33").click(function(){
+            $(".aa").css("height",(historyScoreNum-coreNum)*0.15+6+"px");//初始高度
+            $(".bian").css("height",(historyScoreNum-coreNum)*0.15+"px");
+          });
+          $("#tab22").click(function(){
+            $(".aa").css("height",(historyScoreNum-coreNum)*0.15+6+"px");//初始高度
+            $(".bian").css("height",(historyScoreNum-coreNum)*0.15+"px");
+          });
+          $("#tab11").click(function(){
+            $(".aa").css("height",(historyScoreNum-coreNum)*0.15+6+"px");//初始高度
+            $(".bian").css("height",(historyScoreNum-coreNum)*0.15+"px");
+          });
+
+          //调用案例，需要在被调用的标签内 写上最终的数值
+          jQuery(function($) {
+              $(".timer").countTo({
+                  lastSymbol:" ", //显示在最后的字符
+                  from: 0,  // 开始时的数字
+                  speed: 2000,  // 总时间
+                  refreshInterval:100,  // 刷新一次的时间
+                  beforeSize:0, //小数点前最小显示位数，不足的话用0代替 
+                  decimals: 1,  // 小数点后的位数，小数做四舍五入
+                  onUpdate: function() {
+                  },  // 更新时回调函数
+                  onComplete: function() {
+                      for(i in arguments){
+                          //console.log(arguments[i]);
+                      }
+                  }
+              });
+          });
+        },
+        error:function(){
+          alert("系统崩溃")
+        }
+        
+      })
+      
+      
+    });
+
+  });
+</script>
+
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Wap/View/Student/js/index.js"></script>

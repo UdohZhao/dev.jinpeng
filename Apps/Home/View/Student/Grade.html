@@ -1,0 +1,160 @@
+<include file="./Public/Bootstrap/header.html" />
+<!-- 当前页面CSS -->
+<!--<link rel="stylesheet" type="text/css" href="/Apps/Home/View/Student/css/firstGrade.css">-->
+<!--<link rel="stylesheet" href="/Apps/Home/View/Student/css/selfEvaluation.css">-->
+<!--<style>
+    .list-inline li.liStyle{
+        background-image: none;
+        position: relative;
+        padding: 0;
+    }
+    .list-inline li.liStyle a{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:20px;
+        height: 20px;
+        display: inline-block;
+        background-color: #fff;
+        border: 1px solid #ccc;
+    }
+    .list-inline li.liStyle span{
+        margin-left:22px;
+    }
+    .questionNum{
+        display: inline-block;
+        width:6%;
+    }
+    .questionNum p{
+        margin:0;
+    }
+    .content_topic{
+        display: inline-block;
+        width:90%;
+    }
+</style>-->
+<if condition="$userT eq 2">  <!--学生应用样式-->
+    <link rel="stylesheet" href="/Apps/Home/View/Student/css/selfEvaluation.css">
+    <else/>
+    <link rel="stylesheet" href="/Apps/Home/View/Teacher/css/Tdetails.css"><!--教师引用样式-->
+</if>
+<include file="./Apps/Home/View/Stucommon/paging.html" />
+
+<include file="./Apps/Home/View/Stucommon/evaluationheader.html" />
+<if condition="(needArr)">
+    <table class="table table-bordered">
+        <caption>第{$needArr.periods}期得分</caption>
+        <thead>
+        <tr>
+            <th style="border-left: 0 solid #000;">姓名</th>
+            <th>家人评价</th>
+            <th>自我评价</th>
+            <th>同学评价</th>
+            <th>综合评价</th>
+            <th>最终得分</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td style="border-left: 0 solid #000;">{$needArr.studentname}</td>
+                <td>{$needArr.patriarch}</td>
+                <td>{$needArr.ego}</td>
+                <td>{$needArr.schoolmate}</td>
+                <if condition="$needArr.status eq 1">
+                 <td>优</td>
+                    <elseif condition="$needArr.status eq 2"/>
+                    <td>良</td>
+                    <elseif condition="$needArr.status eq 3"/>
+                    <td>中</td>
+                    <elseif condition="$needArr.status eq 4"/>
+                    <td>差</td>
+                    <elseif condition="$needArr.status eq 0"/>
+                    <td>待老师评价</td>
+                </if>
+                <td>{$needArr.grade}</td>
+            </tr>
+        </tbody>
+    </table>
+    <if condition="$userT eq 2">
+    <h3>答题详情&nbsp;&nbsp;&nbsp;<a href="__APP__/Student/Grade/uid/{$needArr.uid}/perid/{$needArr.perid}/type/0" name="typeClass">家人评价</a>
+                &nbsp;&nbsp;&nbsp;<a href="__APP__/Student/Grade/uid/{$needArr.uid}/perid/{$needArr.perid}/type/1" name="typeClass">自我评价</a>
+                &nbsp;&nbsp;&nbsp;<a href="__APP__/Student/Grade/uid/{$needArr.uid}/perid/{$needArr.perid}/type/2" name="typeClass">同学评价</a>
+    </h3>
+        <else/>
+        <h3>答题详情&nbsp;&nbsp;&nbsp;<a href="__APP__/Student/Grade/uid/{$needArr.uid}/perid/{$needArr.perid}/type/0/userT/1" name="typeClass">家人评价</a>
+            &nbsp;&nbsp;&nbsp;<a href="__APP__/Student/Grade/uid/{$needArr.uid}/perid/{$needArr.perid}/type/1/userT/1" name="typeClass">自我评价</a>
+            &nbsp;&nbsp;&nbsp;<a href="__APP__/Student/Grade/uid/{$needArr.uid}/perid/{$needArr.perid}/type/2/userT/1" name="typeClass">同学评价</a>
+        </h3>
+    </if>
+        <script type="text/javascript">
+            var obj=document.getElementsByName("typeClass");
+            for(var i=0;i<obj.length;i++){
+                if('{$Think.get.type}'==i){
+                    obj[i].style.color="#7b5028";
+                }
+            }
+
+        </script>
+
+
+    <div class="col-md-12 col-sm-12">
+
+
+            <foreach name="question" item="vo" key="k">
+                <div class="row">
+                    <div class="col-md-2 col-sm-1">
+                        <p class="topic_num"><a>#{$vo.sort}</a></p>
+                        <input type="hidden" name="id[]" value="{$vo.id}">
+                    </div>
+                    <div class="col-md-10 col-sm-11 content_topic">
+                        <p class="topic_content">{$vo.test_questions}</p>
+                    </div>
+                </div>
+
+                    <!--单选遍历-->
+                    <ul class="list-inline">
+                        <foreach name="vo.keyss" item="v" key="k"><!--k选项序号-->
+                            <li>
+                                <a class="question" >
+                                    <img src="/Apps/Home/View/Student/img/勾1.png">
+                                </a><p>{$v}<span style="font-size: 10px;color: #1b1b1b">({$vo.valss.$k})分</span></p><input type="hidden" value="{$vo.selStatus.$k.0}"/>
+
+                                                <foreach name="vo.selValss" item="val">
+                                                <span style="display: none">{$val}&nbsp;</span>
+                                                </foreach>
+                                                <foreach name="vo.selAnswer" item="value">
+                                                   <span style="display: none">{$value}&nbsp;</span>
+                                                </foreach>
+                            </li>
+                        </foreach>
+                    </ul><span>得分：{$vo.finalScore}分</span>
+
+            </foreach>
+
+    </div>
+
+    <else/>
+    <ul class="list-inline info" style="height: 420px;">
+        <p>当前无数据。</p>
+    </ul>
+</if>
+
+</div>
+</div>
+    <div class="page">{$page}</div>
+</div>
+
+<include file="./Public/Bootstrap/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Home/View/Student/js/selfEvaluation.js"></script>
+<script>
+    var qobj=document.getElementsByClassName("question");
+        for(var i=0;i<qobj.length;i++){
+            if(qobj[i].nextSibling.nextSibling.getAttribute("value")==1){   //input输入框的value值
+                qobj[i].firstChild.nextSibling.style.display="inline"; //img标签的样式 即是否显示钩
+            }
+
+        }
+
+</script>

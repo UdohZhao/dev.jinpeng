@@ -1,0 +1,115 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title">管理员</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">管理员列表</h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-striped">
+                    <caption>管理员列表</caption>
+                    <thead>
+                    <tr>
+                        <th>用户名</th>
+                        <th>注册时间</th>
+                        <th>管理员类型</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="info" item="vo">
+                    <tr>
+                        <td>{$vo.username}</td>
+                        <td>{$vo.ctime|date='Y-m-d H:i:s',###}</td>
+                        <if condition="$vo.type eq 1">
+                        <td>管理员</td>
+                            <else/>
+                            <td>超级管理员</td>
+                        </if>
+                        <if condition="$vo.status eq 1">
+                        <td>冻结</td>
+                            <else/>
+                            <td>正常</td>
+                        </if>
+                        <td><a href="__APP__/User/update/id/{$vo.id}">修改</a>&nbsp;|&nbsp;
+                            <a href="__APP__/User/del/id/{$vo.id}">删除</a>&nbsp;|&nbsp;
+                            <if condition="$vo.status eq 0">
+                            <input onclick="javascript:fun(this,'{$vo.id}')" id="dj" style="height:20px;" type="button" value="冻结"/>
+                                <else/>
+                                <input onclick="javascript:fun1(this,'{$vo.id}')" id="jd" style="height:20px;" type="button" value="已冻结"/>
+                            </if>
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+<include file="Layouts/footer" />
+
+<script>
+    function fun(obj,id){
+        $(function(){
+                if(confirm("确定冻结该账号？")){
+                    $.ajax({
+                        url:'__APP__/User/dongjie',
+                        dataType:'json',
+                        type:'post',
+                        data:'id='+id,
+                        success:function (re) {
+                            if(re.info==1){
+                                alert("冻结成功");
+                                $(obj).val("已冻结");
+                                window.location.href="__APP__/User/adminOper";
+                            }else if(re.info==3){
+                                alert("只有超级管理员才能有此操作");
+                            }
+                            else{
+                                alert("冻结失败");
+                            }
+
+                        }
+                    })
+                }
+        })
+    }
+
+    function fun1(obj1,id){
+        $(function(){
+            if(confirm("确定解冻该账号？")){
+                $.ajax({
+                    url:'__APP__/User/jiedong',
+                    dataType:'json',
+                    type:'post',
+                    data:'id='+id,
+                    success:function (re) {
+                        if(re.info==1){
+                            alert("解冻成功");
+                            $(obj1).val("冻结");
+                            window.location.href="__APP__/User/adminOper";
+                        }else if(re.info==3){
+                            alert("只有超级管理员才能有此操作");
+                        }
+                        else{
+                            alert("解冻失败");
+                        }
+
+                    }
+                })
+            }
+        })
+    }
+</script>

@@ -1,0 +1,83 @@
+<include file="Layouts/header" />
+<!-- 搜索 -->
+<include file="Layouts/serch" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" type="text/css" href="/Apps/Wap/View/Sthecycle/css/index.css">
+	<!-- 主体内容 start-->
+    <div class="container" style="padding: 20px 15px;" id="demo-list">
+		<if condition="(!$info)">
+			当前期数没有作答
+		<else/>
+		<foreach name="info" item="v">
+			<div class="historyList">
+				<if condition="$status eq 1"><!--老师点击链接处-->
+					<a href="/Wap/Teacher/index/cid/{$v.cid}/pcid/{$v.pcid}/perid/{$v.perid}">第{$v.periods}期</a>
+					<else/>
+				<a href="/Wap/Student/index/cid/{$v.cid}/pcid/{$v.pcid}/perid/{$v.perid}/studentModel/1">第{$v.periods}期</a>
+				</if>
+			</div>
+		</foreach>
+		</if>
+	</div>
+	<!-- 主体内容 end-->
+<!-- 底部菜单，在历史周期中消失 -->
+<if condition="($teacherModel)">
+	<include file="Layouts/Tmenu" />
+	<else/>
+	<include file="Layouts/menu" />
+</if>
+
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Wap/View/Sthecycle/js/index.js"></script>
+
+<!-- IF(历史得分进入) start-->
+<!-- <script type="text/javascript">
+	$(".downMenu").hide();  //隐藏底部菜单
+</script> -->
+<!-- IF(历史得分进入) end-->
+
+<script src="http://malsup.github.io/jquery.form.js"></script>
+<script>
+(function($) {
+  $.expr[":"].Contains = function(a, i, m) {
+    return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+  };
+  function filterList(header, list) {
+    var form = $("<form>").attr({
+      "class":"filterform",
+      action:"#"
+    });
+    var  input = $("<input>").attr({
+      "class":"filterinput",
+      type:"text"
+    });
+    $(form).append(input).appendTo(header);
+    $(input).change(function() {
+      var filter = $(this).val();
+      if (filter) {
+        $matches = $(list).find("a:Contains(" + filter + ")").parent();
+        $(".historyList", list).not($matches).slideUp();
+        $matches.slideDown();
+      } else {
+        $(list).find(".historyList").slideDown();
+      }
+      return false;
+    }).keyup(function() {
+      $(this).change();
+    });
+  }
+  $(function() {
+    filterList($("#form"), $("#demo-list"));
+  });
+})(jQuery);
+// $("#form").click(function(){
+// 	$("#form .xiaoguo").css({"left":"23px","margin-left":"0"});
+// 	$("#form .xiaoguo span").css("display","none");
+// })
+$("#form").click(function(){ 
+	$("#form .xiaoguo").css({"left":"23px","margin-left":"0"});
+ 	$("#form .xiaoguo span").css("display","none");
+});
+</script>
+

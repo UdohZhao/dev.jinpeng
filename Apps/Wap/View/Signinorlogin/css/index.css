@@ -1,0 +1,48 @@
+.content{
+	padding: 0;
+	background-image: url("/Apps/Wap/View/Signinorlogin/img/登陆2.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+.contentCon{
+	padding-top: 40%;
+	text-align: center;
+}
+.logo{
+	width: 45%;
+}
+.nameJp{
+	width: 65%;
+	margin-top: 20px;
+}
+.contentCon a{
+	display: inline-block;
+	height: 40px;
+	width: 30%;
+	line-height: 40px;
+	border-radius: 5px;
+	background-color: #f4c16f;
+	border: none;
+	margin-top: 40%;
+	font-size: 20px;
+	font-weight: bold;
+	color: #000;
+}
+.login{
+	float: left;
+	margin-left:30px; 
+}
+.signin{
+	float: right;
+	margin-right: 30px;
+}
+
+.begin{
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0;
+	background-image: url("/Apps/Wap/View/Signinorlogin/img/启动页2.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}

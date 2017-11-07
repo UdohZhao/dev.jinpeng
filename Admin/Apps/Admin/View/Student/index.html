@@ -1,0 +1,174 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+  <!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title"># 班级管理</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">【{$gradeClass}】学生列表</h3>
+        </div>
+        <form id="searchForm" action="__APP__/Student/index/id/{$id}" method="post">
+        <div class="input-group" style="margin-right: 20px;">
+            <input type="text" class="form-control input-lg" style="width: 200px;float: right;" placeholder="请输入关键字" name="search"><span class="input-group-addon btn btn-primary" onclick="$('#searchForm').submit();">搜索</span>
+        </div>
+        </form>
+        <div class="panel-body">
+           <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>学生姓名</th>
+                <th>累计评分</th>
+                <th>用户名</th>
+                <th>注册时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            <foreach name="data" item="vo" key="k">
+              <tr>
+                <td>
+                  <eq name="vo.status" value="0"><button type="button" class="btn btn-success btn-xs">正常</button></eq>
+                  <eq name="vo.status" value="1"><button type="button" class="btn btn-danger btn-xs">冻结</button></eq>
+                </td>
+                <td>{$vo.name}</td>
+                <td>{$vo.addup}</td>
+                <td>{$vo.username}</td>
+                <td>{$vo.ctime|date='Y/m/d H:i:s',###}</td>
+                <td>
+                  <eq name="vo.status" value="0">
+                    <button type="button" class="btn btn-danger btn-xs" onclick="freeze({$vo.id},1);">冻结</button>
+                  </eq>
+                  <eq name="vo.status" value="1">
+                    <button type="button" class="btn btn-success btn-xs" onclick="freeze({$vo.id},0);">激活</button>
+                  </eq>
+                  <button type="button" class="btn btn-primary btn-xs" onclick="edit({$vo.id},'{$vo.name}','{$vo.addup}','{$vo.username}');">修改</button>
+                  <!-- <button type="button" class="btn btn-default btn-xs">删除</button> -->
+                </td>
+              </tr>
+            </foreach>
+            </tbody>
+          </table>
+          <div style="float: right;">
+            {$page}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+
+<!-- 修改模态框 -->
+<div id="editUserinfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">修改学生信息</h4>
+      </div>
+      <div class="modal-body">
+        <form id="editUserinfoForm" class="form-horizontal" action="__APP__/Student/editUserinfo" method="post">
+        <input type="hidden" name="id"/>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">学生姓名</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">累计评分</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="addup">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">新密码</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" placeholder="如需要修改密码请在此输入" name="newPassword" id="newPassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">确认新密码</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" placeholder="请再次输入新密码" name="confirmPassword">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button type="submit" class="btn btn-default">提 交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<include file="Layouts/footer" />
+<script type="text/javascript">
+  // 修改
+   function edit(id,name,addup,username){
+    // jQuery动态赋值
+    $("input[name='id']").attr("value",id);
+    $("input[name='name']").attr("value",name);
+    $("input[name='addup']").attr("value",addup);
+    $("input[name='username']").attr("value",username).attr("readonly","readonly");
+    $('#editUserinfo').modal({
+      backdrop: 'static',
+      keyboard: false,
+      show: true
+    });
+   }
+   // 验证表单 editUserinfoForm
+   $("#editUserinfoForm").validate({
+      rules:{
+        name: "required",
+        addup: "required",
+        newPassword: {
+          minlength: 6
+        },
+        confirmPassword: {
+          minlength: 6,
+          equalTo: "#newPassword"
+        }
+      },
+      messages:{
+        name: "<span style='color:red;'>姓名不能为空！</span>",
+        addup: "<span style='color:red;'>累计评分不能为空！</span>",
+        newPassword: {
+          minlength: "<span style='color:red;'>密码由至少6位数字或者字母组成！</span>"
+        },
+        confirmPassword: {
+          minlength: "<span style='color:red;'>密码由至少6位数字或者字母组成！</span>",
+          equalTo: "<span style='color:red;'>两次新密码不一致！</span>"
+        }
+      }
+   });
+   // 冻结&激活
+   function freeze(id,status){
+      // status
+      var msg = '';
+      if( status == 1 ){
+         msg += '冻结后该学生将不可登录，确认吗？';
+      }else{
+         msg += '激活后该学生将可正常登录，确认吗？';
+      }
+      //询问框
+      layer.confirm(msg, {
+        btn: ['确定','取消'] //按钮
+      }, function(){
+        window.location.href = '__APP__/Student/freeze/id/'+id+'/status/'+status;
+        layer.closeAll();
+      }, function(){
+        layer.closeAll();
+      });
+   }
+</script>

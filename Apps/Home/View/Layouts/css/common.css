@@ -1,0 +1,99 @@
+.container-fluid{
+  background-image: url('../img/teacher.png');
+  background-size:100% 100%;
+  -moz-background-size:100% 100%; /* 老版本的 Firefox */
+  background-repeat:no-repeat;
+}
+.zindex{
+  z-index: 9999;
+}
+.zcolor{
+  color: #FCFAF2;
+}
+.statusBar{
+  margin-top: 10px;
+}
+.statusBar a{
+  text-decoration:none
+}
+.statusBar a:hover{
+  color: #F17C67;
+}
+.streamer{
+  background-image: url('../img/streamer.png');
+  background-size:100% 100%;
+  -moz-background-size:100% 100%; /* 老版本的 Firefox */
+  background-repeat:no-repeat;
+  height: 100px;
+  opacity: 0.8;
+  filter:alpha(opacity=80);
+  display: flex;
+  justify-content:center;
+  align-items:Center;
+}
+.streamer-up-left label{
+  font-size: 16px;
+  color:#F19483;
+}
+.streamer-up-left p{
+  font-size: 30px;
+  letter-spacing: 5px;
+}
+.streamer-up-right img{
+  float: right;
+}
+.blackboard{
+  margin-top: 30px;
+}
+.blackboard-up-left{
+  background-image: url('../img/navblackboard.png');
+  background-size:200px 100%;
+  -moz-background-size:200px 100%; /* 老版本的 Firefox */
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  filter:alpha(opacity=80);
+  height: 400px;
+}
+.blackboard-up-left ul{
+  margin-top: 20px;
+  line-height: 30px;
+  width: 200px;
+  text-align: center;
+  letter-spacing: 3px;
+}
+.blackboard-up-left li{
+  font-size: 20px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.cicloincorso{
+  border-bottom: 2px solid #EEE;
+}
+.blackboard-up-left li a{
+  color: #FCFAF2;
+  text-decoration:none;
+}
+.blackboard-up-left li a:hover{
+  color: #F17C67;
+}
+.viewall{
+  border-top: 2px solid #EEE;
+}
+.blackboard-up-right{
+  background-image: url('../img/tableblackboard.png');
+  background-size:100% 100%;
+  -moz-background-size:100% 100%; /* 老版本的 Firefox */
+  background-repeat:no-repeat;
+  opacity: 0.8;
+  filter:alpha(opacity=80);
+  height: 600px;
+}
+.blackboard-up-right-content{
+  height: 600px;
+  width: 100%;
+  padding: 35px 50px;
+}
+.active{
+  background-color: #E83015;
+  border:1px solid #E83015;
+}

@@ -1,0 +1,61 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title"># 题库管理</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">答案列表</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>答案内容</th>
+                        <th>对应分数</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name="arr" item="v">
+                        <tr>
+                            <td>{$v.answer_str}</td>
+                            <td>{$v.val_str}</td>
+                            <td><button onclick="javascript:del('{$v.id}')">删除</button></td>
+                        </tr>
+                    </foreach>
+
+                    </tbody>
+
+                </table>
+                {$page}
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script src="/Admin/Apps/Admin/View/Questionbank/js/listss.js"></script>
+
+<script>
+    function del(id){
+        $.ajax({
+            url:'__APP__/Questionbank/delAnswer',
+            data:'id='+id,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+                if(re===true){
+                    layer.msg('删除成功',{icon:1,time:1000},function(){
+                      location.reload();
+                    })
+                }
+            }
+        })
+    }
+</script>

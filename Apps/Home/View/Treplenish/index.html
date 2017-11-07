@@ -1,0 +1,99 @@
+<include file="./Apps/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Treplenish/css/index.css">
+  <!-- 右侧核心内容 start -->
+    <div class="row">
+      <div class="col-md-12 classtitle">
+        <ul class="list-unstyled">
+          <li>{$content.studentname}</li>
+          <li><small>{$content.ctime|date="Y-m-d H:i:s",###}&nbsp;补充</small></li>
+        </ul>
+      </div>
+      <div class="col-md-12 classcontent">
+        <div class="row">
+            <div class="col-md-10 replenishcontent">
+              <p class="lead" id="con">
+                {$content.content}
+              </p>
+            </div>
+            <div class="col-md-2 replenishfm">
+              <ul class="list-unstyled replenishfm-ul">
+                <if condition="$content.type eq 1 && $content.status eq 1">
+                  <li>
+                    优
+                  </li>
+                  <li>
+                      <a data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>优</span>"><img src="/Apps/Home/View/Treplenish/img/开心-2.png" data-toggle="tooltip"></a>
+                  </li>
+                  <elseif condition="$content.type eq 1 && $content.status eq 2"/>
+                  <li>
+                    良
+                  </li>
+                  <li>
+                    <a data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>良</span>"><img src="/Apps/Home/View/Treplenish/img/开心-1.png" data-toggle="tooltip"></a>
+                  </li>
+                  <elseif condition="$content.type eq 1 && $content.status eq 3"/>
+                  <li>
+                    中
+                  </li>
+                  <li>
+                    <a data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>中</span>"><img src="/Apps/Home/View/Treplenish/img/难过-1.png" data-toggle="tooltip"></a>
+                  </li>
+                  <elseif condition="$content.type eq 1 && $content.status eq 4"/>
+                  <li>
+                    差
+                  </li>
+                  <li>
+                    <a data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>差</span>"><img src="/Apps/Home/View/Treplenish/img/哭.png" data-toggle="tooltip"></a>
+                  </li>
+                  <else/>
+                  <li>
+                    <a href="javascript:score('{$content.id}','y',1);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>优</span>"><img src="/Apps/Home/View/Treplenish/img/开心-2.png" data-toggle="tooltip"></a>
+                  </li>
+                  <li>
+                    <a href="javascript:score('{$content.id}','l',1);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>良</span>"><img src="/Apps/Home/View/Treplenish/img/开心-1.png"></a>
+                  </li>
+                  <li>
+                    <a href="javascript:score('{$content.id}','z',1);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>中</span>"><img src="/Apps/Home/View/Treplenish/img/难过-1.png"></a>
+                  </li>
+                  <li>
+                    <a href="javascript:score('{$content.id}','c',1);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>差</span>"><img src="/Apps/Home/View/Treplenish/img/哭.png"></a>
+                  </li>
+                </if>
+              </ul>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- 右侧核心区域 end -->
+<include file="./Apps/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script src="/Apps/Home/View/Treplenish/js/index.js"></script>
+<script>
+
+  function score(id,Evalutype,type){  //Evalutype 评价选择比例     type:评价类型  1补充评价  id 补充评价id值
+    $(function(){
+      var con=$("#con"+id).val();      // 补充内容
+      $.ajax({
+        url:'__APP__/Treplenish/calculate',
+        data:'id='+id+"&type="+type+"&Etype="+Evalutype+"&content="+con,
+        dataType:'json',
+        type:'post',
+        success:function(re){
+            if(re.info==0){
+                alert("请先对该学生进行综合评分，再作补充");
+            }else if(re.info==1){
+                alert("补充评价成功，已重新计算分数");
+              window.location.href="__APP__/Teacher/index";
+            }
+        },
+        error:function(){
+          alert("系统崩溃");
+        }
+      })
+
+    })
+  }
+
+</script>
+

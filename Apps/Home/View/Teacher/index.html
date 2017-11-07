@@ -1,0 +1,137 @@
+<include file="./Apps/Home/View/Layouts/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Teacher/css/index.css">
+  <!-- 右侧核心内容 start -->
+
+    <div class="row">
+        <div class="col-md-12 estimatetitle">
+          <div class="row">
+            <div class="col-md-3 estimatetitle-left">第<span>{$period.periods}</span>期</div>
+            <div class="col-md-6 estimatetitle-center"><span>{$_SESSION['userinfo']['name']}</span>您班级学生评分情况</div>
+            <div class="col-md-3 estimatetitle-right">
+              <a href="__APP__/Phpexcel/index/perid/{$period.id}"><svg class="icon" aria-hidden="true">
+                  <use xlink:href="#icon-daochu"></use>
+              </svg>导出Excel</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 estimatedetails">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>学生姓名</th>
+                <th>自我评价</th>
+                <th>家长评价</th>
+                <th>同学评价</th>
+                <th>评价得分</th>
+                <th>综合评价</th>
+              </tr>
+            </thead>
+            <tbody>
+            <foreach name="history" item="v">
+              <tr>
+                <if condition="$v.suppType eq null">
+                  <td><a href="__APP__/Tstudent/index/uid/{$v.uid}">{$v.studentname}</a></td>
+                <elseif condition="$v.suppType eq 1"/>
+                  <td><a href="__APP__/Tstudent/index/uid/{$v.uid}">{$v.studentname}</a><span class="badge" onclick="javascript:window.location.href='__APP__/Treplenish/index/uid/{$v.uid}/perid/{$v.perid}'" style="cursor: pointer; background-color: #ccc;" >1</span</td>
+                  <else/>
+                  <td><a href="__APP__/Tstudent/index/uid/{$v.uid}">{$v.studentname}</a><span class="badge" onclick="javascript:window.location.href='__APP__/Treplenish/index/uid/{$v.uid}/perid/{$v.perid}'" style="cursor: pointer;" >1</span></td>
+                </if>
+                <td id="ego{$v.id}">{$v.ego}</td>
+                <td id="patriarch{$v.id}">{$v.patriarch}</td>
+                <td id="schoolmate{$v.id}">{$v.schoolmate}</td>
+                <if condition="$v.status eq 0">
+                <td id="evalu{$v.id}"> 待教师评价</td>
+                  <else/>
+                  <td id="evalu{$v.id}"> {$v.grade}</td>
+                </if>
+                <td class="synthesize" id="p{$v.id}">
+                  <if condition="$v.status eq 0">
+                  <a href="javascript:score('{$v.uid}','{$v.id}','y',0);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>优</span>"><img src="/Apps/Home/View/Teacher/img/开心-2.png" data-toggle="tooltip"></a>
+                  <a href="javascript:score('{$v.uid}','{$v.id}','l',0);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>良</span>"><img src="/Apps/Home/View/Teacher/img/开心-1.png"></a>
+                  <a href="javascript:score('{$v.uid}','{$v.id}','z',0);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>中</span>"><img src="/Apps/Home/View/Teacher/img/难过-1.png"></a>
+                  <a href="javascript:score('{$v.uid}','{$v.id}','c',0);" data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>差</span>"><img src="/Apps/Home/View/Teacher/img/哭.png"></a>
+                  <elseif condition="$v.status eq 1"/>
+                   优&nbsp; <a data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>优</span>"><img src="/Apps/Home/View/Teacher/img/开心-2.png" data-toggle="tooltip"></a>
+                    <elseif condition="$v.status eq 2"/>
+                    良&nbsp; <a  data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>良</span>"><img src="/Apps/Home/View/Teacher/img/开心-1.png"></a>
+                    <elseif condition="$v.status eq 3"/>
+                    中&nbsp; <a  data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>中</span>"><img src="/Apps/Home/View/Teacher/img/难过-1.png"></a>
+                    <elseif condition="$v.status eq 4"/>
+                    差&nbsp; <a  data-toggle="tooltip" data-html="true" data-original-title="<span style='color:#F17C67;font-size:18px;'>差</span>"><img src="/Apps/Home/View/Teacher/img/哭.png"></a>
+                  </if>
+                </td>
+              </tr>
+            </foreach>
+              <tr>
+                <td colspan="6">{$page}</td>
+              </tr>
+              <tr>
+                <td>评价总分</td>
+                <td>{$needScore.egoAllScore}</td>
+                <td>{$needScore.patriarchAllScore}</td>
+                <td>{$needScore.schoolmateAllScore}</td>
+                <td>{$needScore.gradeAllScore}</td>
+                <td>{$needScore.comfire}</td>
+              </tr>
+              <tr>
+                <td>平均得分</td>
+                <td>{$needScore.average1}</td>
+                <td>{$needScore.average0}</td>
+                <td>{$needScore.average2}</td>
+                <td>{$needScore.average3}</td>
+                <td>{$needScore.comfireGr}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+    <!-- 右侧核心区域 end -->
+<include file="./Apps/Home/View/Layouts/footer.html" />
+<!-- 当前页面js -->
+<script src="/Apps/Home/View/Teacher/js/index.js"></script>
+<script src="/Apps/Home/View/Layouts/js/common.js"></script>
+
+<script>
+
+      function score(uid,id,Evalutype,type){  //Evalutype 评价选择比例  uid学生用户uid   type:评价类型  0综合评价  id 综合评价id值
+        $(function(){
+          var ego=$("#ego"+id).html();      // 家长评价
+          var patriarch=$("#patriarch"+id).html();// 自我评价
+          var schoolmate=$("#schoolmate"+id).html();//同学评价
+          $.ajax({
+            url:'__APP__/Teacher/calculate',
+            data:'uid='+uid+'&id='+id+"&type="+type+"&Etype="+Evalutype+"&ego="+ego+"&patriarch="+patriarch+"&schoolmate="+schoolmate,
+            dataType:'json',
+            type:'post',
+            success:function(re){
+
+              $("#evalu"+id).html(re.info);
+
+              if(re.msg=='y'){
+                var dataTitle='<span style="color:#F17C67;font-size:18px;">优</span>';
+              $("#p"+id).html("优&nbsp;" +
+                      "<a data-toggle='tooltip' data-html='true' data-original-title='"+dataTitle+"'><img src='/Apps/Home/View/Teacher/img/开心-2.png' data-toggle='tooltip'></a>");
+              }else if(re.msg=='l'){
+                var dataTitle='<span style="color:#F17C67;font-size:18px;">良</span>';
+                $("#p"+id).html("良&nbsp;" +
+                        "<a data-toggle='tooltip' data-html='true' data-original-title='"+dataTitle+"'><img src='/Apps/Home/View/Teacher/img/开心-1.png'></a>");
+              }else if(re.msg=='z'){
+                var dataTitle='<span style="color:#F17C67;font-size:18px;">中</span>';
+                $("#p"+id).html("中&nbsp;"+
+                        "<a data-toggle='tooltip' data-html='true' data-original-title='"+dataTitle+"'><img src='/Apps/Home/View/Teacher/img/难过-1.png'></a>");
+              }else if(re.msg=='c'){
+                var dataTitle='<span style="color:#F17C67;font-size:18px;">差</span>';
+                $("#p"+id).html("差&nbsp;"+
+                        "<a data-toggle='tooltip' data-html='true' data-original-title='"+dataTitle+"'><img src='/Apps/Home/View/Teacher/img/哭.png'></a>");
+              }
+            },
+            error:function(re){
+              alert("系统崩溃");
+            }
+          })
+
+        })
+      }
+
+</script>

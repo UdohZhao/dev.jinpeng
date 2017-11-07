@@ -1,0 +1,167 @@
+<include file="./Public/Bootstrap/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Student/css/selfEvaluation.css">
+<include file="./Apps/Home/View/Stucommon/paging.html" />
+<include file="./Apps/Home/View/Stucommon/evaluationheader.html" />
+
+<if condition="($question)">
+
+    <div class="col-md-12 col-sm-12">
+
+
+        <foreach name="question" item="vo" key="k">
+            <div class="row">
+                <div class="col-md-2 col-sm-1">
+                    <p class="topic_num"><a>#{$vo.sort}</a></p>
+                    <input type="hidden" name="id[]" value="{$vo.id}">
+                </div>
+                <div class="col-md-10 col-sm-11 content_topic">
+                    <p class="topic_content">{$vo.test_questions}</p>
+                </div>
+            </div>
+
+            <!--单选遍历-->
+            <ul class="list-inline">
+                <foreach name="vo.keyss" item="v" key="k"><!--k选项序号-->
+                    <li>
+                        <a class="question" >
+                            <img src="/Apps/Home/View/Student/img/勾1.png">
+                        </a><p>{$v}</p><input type="hidden" value="{$vo.selStatus.$k.0}"/>
+
+                        <foreach name="vo.selValss" item="val">
+                            <span style="display: none">{$val}&nbsp;</span>
+                        </foreach>
+                        <foreach name="vo.selAnswer" item="value">
+                            <span style="display: none">{$value}&nbsp;</span>
+                        </foreach>
+                    </li>
+                </foreach>
+            </ul>
+
+        </foreach>
+
+    </div>
+
+
+</if>
+<form id="frm" action="__APP__/Student/saveAnswer" method="post">
+    <input type="hidden" name="types" value="{$type}"/>
+        <div class="col-md-12 col-sm-12">
+
+        <if condition="($period)">
+            <input type="hidden" name="periods" value="{$period.id}"/>
+        <foreach name="data" item="vo" key="k">
+          <div class="row listMargin">
+            <div class="col-md-2 col-sm-1">
+              <p class="topic_num"><a>#{$vo.sort}</a></p>
+                <input type="hidden" name="id[]" value="{$vo.id}">
+            </div>
+            <div class="col-md-10 col-sm-11 content_topic">
+              <p class="topic_content">{$vo.test_questions}</p>
+            </div>
+          </div>
+            <if condition="$vo.nature eq 0">
+                <!--单选遍历-->
+          <ul class="list-inline">
+              <script type="text/javascript" src="/Apps/Home/View/Student/js/single.js"></script>
+          <foreach name="vo.keyss" item="v" key="k">
+            <li>
+              <a class="dob" onclick="javascript:seleOnly(this.parentNode.parentNode.nextElementSibling,'{$vo.id}','{$v}')">
+                  <img src="/Apps/Home/View/Student/img/勾1.png">
+              </a><p>{$v}</p>
+            </li>
+          </foreach>
+          </ul><input type="hidden" value=""/>
+                <else/>
+                <!--多选遍历-->
+                <ul class="list-inline">
+                    <!--<script type="text/javascript" src="/Apps/Home/View/Student/js/moreSel.js"></script>-->
+                    <foreach name="vo.keyss" item="v" key="k">
+                        <li>
+                            <a class="imagesDob" onclick="javascript:sele(this.parentNode.nextElementSibling,'{$vo.id}','{$v}','{$k}')">
+                                <img name="dob{$vo.id}" src="/Apps/Home/View/Student/img/勾1.png">
+                            </a><p>{$v}</p>
+                        </li><input type="hidden" value=""/>
+                    </foreach>
+                </ul>
+            </if>
+        </foreach>
+
+        <else/>
+          <blockquote>
+            <p>暂无正在进行中的周期！</p>
+          </blockquote>
+        </if>
+        </div>
+
+      </div>
+         <div class="page">{$page}</div>
+    <if condition="$period neq null">
+        <input type="submit" value="提交当前评价" id="sbt" class="submit">
+    </if>
+
+</form>
+    </div>
+<div id="s"><p></p></div>
+<include file="./Public/Bootstrap/footer.html" />
+<!-- 当前页面js -->
+
+<script type="text/javascript" src="/Apps/Home/View/Student/js/selfEvaluation.js"></script>
+
+<script>
+    //多选题控制
+    function sele(obj,val,v,k){   //val：选择题目ID     v：所选题目得分   k:每道题的选项对应的序号
+        var dobj=document.getElementsByName("dob"+val);//每一个题目对应的四个选项钩钩图标对象
+        if (dobj[k].style.display=="" || dobj[k].style.display=="none"){
+            obj.setAttribute("name",val+"[]");
+            obj.setAttribute("value",v);
+            dobj[k].style.display="inline";
+        }else if(dobj[k].style.display=="inline"){
+            obj.setAttribute("name","");
+            obj.setAttribute("value","");
+            dobj[k].style.display="none";
+        }
+    }
+    //单选题控制
+    function seleOnly(obj,val,v) {   //val：选择题目ID     v：所选题目得分
+
+        obj.setAttribute("name", val+"[]");
+        obj.setAttribute("value", v);
+    }
+</script>
+
+<script>
+$(function(){
+
+   //alert($("a[name='mask1']",parent.document).eq(0).parent().attr("style"))
+   var obj=$("a[name='mask1']",parent.document).parent();
+    for(var i=0;i<obj.length;i++){
+        if('{$type}'==i){
+            $("a[name='mask1']",parent.document).eq(i).parent().attr("style","background-color: #7b5028;");
+            $("a[name='mask1']",parent.document).eq(i).attr("style","color: #fff;");
+        }else{
+            $("a[name='mask1']",parent.document).eq(i).parent().attr("style","");
+            $("a[name='mask1']",parent.document).eq(i).attr("style","color: #000;");
+
+            $("#mask2",parent.document).parent().attr("style","");
+            $("#mask2",parent.document).attr("style","color: #000;");
+        }
+    }
+})
+
+</script>
+
+<script>
+    var qobj=document.getElementsByClassName("question");
+    for(var i=0;i<qobj.length;i++){
+        if(qobj[i].nextSibling.nextSibling.getAttribute("value")==1){   //input输入框的value值
+            qobj[i].firstChild.nextSibling.style.display="inline"; //img标签的样式 即是否显示钩
+        }
+
+    }
+    if('{$question}'){
+        $(function () {
+            $("#sbt").hide();
+        })
+    }
+</script>

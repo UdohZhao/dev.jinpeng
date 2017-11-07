@@ -1,0 +1,27 @@
+    <include file="./Public/Bootstrap/header.html" />
+    <!-- 当前页面CSS -->
+    <link rel="stylesheet" type="text/css" href="/Apps/Home/View/Student/css/firstGrade.css">
+    <include file="./Apps/Home/View/Stucommon/paging.html" />
+
+    <include file="./Apps/Home/View/Stucommon/evaluationheader.html" />
+    <if condition="($info)">
+      <ul class="list-inline info" style="height: 420px;">
+            <volist name="info" id="vo">
+                <li><a href="__APP__/Student/Grade/perid/{$vo.perid}">第{$vo.periods}期</a></li>
+            </volist>
+          </ul>
+    <else/>
+      <ul class="list-inline info" style="height: 420px;">
+          <p>当前无数据。</p>      
+      </ul>
+    </if>
+        </div>
+        <div class="page">{$page}</div>
+      </div>
+    </div>
+
+
+    <include file="./Public/Bootstrap/footer.html" />
+    <!-- 当前页面js -->
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/selfEvaluation.js"></script>
+    

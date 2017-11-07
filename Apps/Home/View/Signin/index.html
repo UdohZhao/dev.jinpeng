@@ -1,0 +1,72 @@
+<include file="./Public/Bootstrap/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Signin/css/signin.css">
+
+
+      <!-- 页面主体 -->
+      <div class="container-fluid">
+          <div class="back_img">
+          </div>
+          <div class="cover">
+          </div>
+          <img src="/Apps/Home/View/Signin/img/诗句1.png">
+          <div class="container">
+            <form id="signinForm" class="form-horizontal" action="__APP__/Signin/index" method="post">
+            <input type="hidden" name="type" value="0"/>
+              <div class="row row_top">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 title_name">
+                  <h1><img src="/Apps/Home/View/Signin/img/金鹏实验小学注册.png"></h1>
+                </div>
+              </div>
+              <div class="row row_top">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 title_name">
+                  <h3><img src="/Apps/Home/View/Signin/img/用户注册.png"></h3>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                  <select class="form-control select_style" id="cid">
+                    <foreach name="pdata" item="vo" key="k">
+                      <option value="{$vo.id}">{$vo.cname}</option>
+                    </foreach>
+                  </select>
+                  <select class="form-control select_style" style="margin-left: 3px;" name="cid" id="scid">
+                    <foreach name="sdata" item="vo" key="k">
+                      <option value="{$vo.id}">{$vo.cname}</option>
+                    </foreach>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputCount3" class="col-md-4 control-label sr-only">用户名</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control input_style" id="inputCount3" placeholder="请输入用户名" name="username">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPassword3" class="col-md-4 control-label sr-only">密码</label>
+                <div class="col-md-4">
+                  <input type="password" class="form-control input_style" placeholder="请输入密码" name="password" id="password">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputPasswordAgain3" class="col-md-4 control-label sr-only">确认密码</label>
+                <div class="col-md-4">
+                  <input type="password" class="form-control input_style" placeholder="请输入确认密码" name="confirmPassword">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-4 col-md-offset-4">
+                  <button type="submit" class="btn_width">确定注册</button><br/>
+                  <a class="return_style" href="__APP__/Login/loading">已有账号？&nbsp;<span style="color: #23527c;">返回登录</span></a>
+                </div>
+              </div>
+            </form>
+          </div>
+  </div>
+
+<include file="./Public/Bootstrap/footer.html" />
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Home/View/Signin/js/signin.js"></script>

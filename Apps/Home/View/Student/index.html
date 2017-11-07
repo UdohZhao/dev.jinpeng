@@ -1,0 +1,236 @@
+    <include file="./Public/Bootstrap/header.html" />
+    <!-- 当前页面CSS -->
+    <link rel="stylesheet" href="/Apps/Home/View/Student/css/index.css">
+
+    <!-- 页面主体 -->
+    <div class="container-fluid" style="position: relative;">
+      <div class="row cover">
+        <div class="col-md-12"></div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 statusbar">
+            <p class="top_edit"><span>您好，{$Think.session.userinfo.name}</span><span>Class：{$Think.session.userinfo.class}</span><a href="javascript:;" onclick="changePassword();">[修改密码]</a><a href="__APP__/Login/logout">[退出]</a></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row name_logo">
+        <img src="/Apps/Home/View/Student/img/学生标题.jpg">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 col-md-5_left">
+              <img src="/Apps/Home/View/Student/img/金鹏字.png">
+              <h1>金鹏在线评价</h1>
+            </div>
+            <div class="col-md-6 col-md-5_right">
+              <img src="{$info.logo}">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row content_content" style="margin-top: 40px;">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-2 left_menu">
+                <img src="/Apps/Home/View/Student/img/学生左菜单.png">
+                <ul class="list-unstyled ul_one" style="margin-bottom: 20px; z-index: 100;">
+                  <li>
+                    <img src="/Apps/Home/View/Student/img/三角.png" style="transform: rotate(0);">
+                    <span class="evaluation click_menu">评价</span>
+                    <ul class="list-unstyled ul_list" style="display: block;">
+                      <li style="background-color: #7b5028;"><a name="mask1" target="ife1" href="__APP__/Student/selfEvaluation/type/0" style="color: #fff;">家长评价</a></li>
+                      <li><a name="mask1" target="ife1"  href="__APP__/Student/selfEvaluation/type/1">自我评价</a></li>
+                      <li><a name="mask1" target="ife1" href="__APP__/Student/selfEvaluation/type/2">同学评价</a></li>
+                      <li><a id="mask2" target="ife1" href="__APP__/Student/overallRatings/all/3">综合得分</a></li>
+                    </ul>
+
+                  </li>
+                  <li>
+                    <img src="/Apps/Home/View/Student/img/三角.png">
+                    <span class="history click_menu">历史得分</span>
+                    <ul class="list-unstyled ul_list">
+                      <volist name="pcInfo" id="vo">
+                          <input type="hidden" name="id" value="{$vo.id}">
+                          <li><a target="ife1" href="__URL__/firstGrade/pcid/{$vo.pcid}">{$vo.cname}</a></li>
+                      </volist>
+                      <li><a target="ife1" href="__APP__/Student/totalScore">总得分</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-md-9" style="width: 832px; float: right;">
+                <iframe name="ife1" frameborder="0" scrolling="no" src="__APP__/Student/selfEvaluation/type/0"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!-- 修改密码 -->
+<div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">修改密码</h4>
+      </div>
+      <div class="modal-body">
+          <form id="changePassform" class="form-horizontal" style="margin:0px;" action="__APP__/Signin/changePassword" method="post">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="inputEmail3" value="{$Think.session.userinfo.username}" readonly="readonly">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-3 control-label">原始密码</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="password" placeholder="请输入原始密码" name="password">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-3 control-label">新密码</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="newPassword" placeholder="请输入新密码" name="newPassword">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="inputPassword3" class="col-sm-3 control-label">确认新密码</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" placeholder="请再次输入新密码" name="confirmPassword">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-default my_change">提 交</button>
+              </div>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 新注册用户 -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="myLargeModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="gridSystemModalLabel">这位同学请问怎么称呼?</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+          <input type="text" class="form-control" placeholder="请输入你的姓名" name="name"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="bindName();" class="btn btn-primary">提交</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<include file="./Public/Bootstrap/footer.html" />
+<script type="text/javascript">
+  //判断是否为新注册用户
+  if( '{$Think.session.userinfo.name}' == 1 ){
+    $('#myLargeModalLabel').modal({
+      backdrop: 'static',
+      keyboard: false,
+      show: true
+    });
+  }
+  // 绑定姓名
+  function bindName(){
+   var name = $("input[name='name']").val();
+    if( name == false ){
+      layer.alert('姓名不能为空!',{icon:5});
+    }else{
+      //询问框
+      layer.confirm('姓名提交成功后将不可更改，确认提交吗？', {
+        btn: ['确定','取消'] //按钮
+      }, function(){
+        // Ajax
+        $.ajax({
+          type: 'POST',
+          url: '__APP__/Student/bindName',
+          data: {name:name},
+          success: function(Msg){
+            // Msg
+            if( Msg == 1 ){
+              layer.msg('欢迎你，'+name+'同学',{icon:6});
+              setTimeout("window.location.href='__APP__/Student/index'",3000);
+            }else{
+              layer.alert('提交失败!',{icon:5});
+            }
+          },
+          dataType: 'JSON'
+        });
+        layer.closeAll();
+      }, function(){
+        layer.closeAll();
+      });
+    }
+  }
+  // 修改密码
+  function changePassword(){
+    $('#changePassword').modal({
+      backdrop: 'static',
+      keyboard: false,
+      show: true
+    });
+  }
+</script>
+<script type="text/javascript">
+$(function(){
+  // 验证修改密码表单
+  $("#changePassform").validate({
+    rules: {
+      password: {
+        required: true,
+        minlength: 6,
+        remote: {
+          url: "__APP__/Signin/changePassword",
+          type: "post",
+          dataType: "json",
+          data: {
+             password: function() {
+                return $("#password").val();
+             }
+          }
+        }
+      },
+      newPassword: {
+        required: true,
+        minlength: 6
+      },
+      confirmPassword: {
+        required: true,
+        minlength: 6,
+        equalTo: "#newPassword"
+      }
+    },
+    messages: {
+      password: {
+        required: "<span style='color:red;'>原始密码不能为空！</span>",
+        minlength: "<span style='color:red;'>密码由至少6位数字或者字母组成！</span>"
+      },
+      newPassword: {
+        required: "<span style='color:red;'>新密码不能为空！</span>",
+        minlength: "<span style='color:red;'>密码由至少6位数字或者字母组成！</span>"
+      },
+      confirmPassword: {
+        required: "<span style='color:red;'>确认新密码不能为空！</span>",
+        minlength: "<span style='color:red;'>密码由至少6位数字或者字母组成！</span>",
+        equalTo: "<span style='color:red;'>两次新密码不一致！</span>"
+      }
+    }
+  });
+});
+</script>
+<!-- 当前页面js -->
+<script type="text/javascript" src="/Apps/Home/View/Student/js/index.js"></script>

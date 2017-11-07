@@ -1,0 +1,48 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title"> 站点管理</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">站点配置</h3>
+            </div>
+            <div class="panel-body">
+
+                <form class="form-horizontal" action="__APP__/Site/save" method="post" role="form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">logo图片</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="logo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname"  class="col-sm-2 control-label">站点名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="cname" class="form-control" id="lastname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">版权所有</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="copyright" class="form-control" id="lastname">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">提交</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+<include file="Layouts/footer" />
+

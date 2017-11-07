@@ -1,0 +1,25 @@
+<include file="Layouts/header" />
+<!-- 当前页面CSS -->
+<link rel="stylesheet" href="/Apps/Wap/View/Shistorycycle/css/index.css">
+<!-- 内容主体 start-->
+	<div class="container-fluid bckImg">
+	</div>
+	<div class="container">
+		<ul class="ul">
+			<foreach name="pcInfo" item="v">
+			<li>
+				<a href="/Wap/Sthecycle/index/pcid/{$v.pcid}">{$v.cname}</a>
+			</li>
+			</foreach>
+
+			<li class="totalGrade">
+				<a href="/Wap/Sallgrades/index">总得分</a>
+			</li>
+		</ul>
+	</div>
+<!-- 内容主体 end-->
+<include file="Layouts/footer" />
+<script type="text/javascript" src="/Apps/Wap/View/Layouts/js/bckImg.js"></script>
+<!-- 当前页面 -->
+<script type="text/javascript" src="/Apps/Wap/View/Shistorycycle/js/index.js"></script>
+

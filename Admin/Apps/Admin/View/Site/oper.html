@@ -1,0 +1,84 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+<!-- Page -->
+<div class="page animsition">
+    <div class="page-header">
+        <h1 class="page-title"> 站点信息</h1>
+    </div>
+    <div class="page-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">站点信息</h3>
+            </div>
+            <div class="panel-body">
+
+                <form class="form-horizontal" action="__APP__/Site/usave" method="post" role="form" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">logo图片</label>
+                        <div class="col-sm-10">
+                            <img id="imgs" src="{$info.logo}" width="80" height="50">
+                            <input id="simg" style="display: none" type="file" name="logo">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname"  class="col-sm-2 control-label">站点名称</label>
+                        <div class="col-sm-10">
+                            <input type="text"   name="cname" value="{$info.cname}" class="form-control" id="lastname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">版权所有</label>
+                        <div class="col-sm-10">
+                            <input type="text"  name="copyright" value="{$info.copyright}" class="form-control" id="lastname">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left: 110px">状态
+                    <label class="checkbox-inline">
+                        <input type="radio" name="status" id="optionsRadios3" value="0" checked>正常
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="radio" name="status" id="optionsRadios4" value="1">关闭
+                    </label>
+                        <script>
+                            var obj=document.getElementsByName("status");
+                            for(var i=0;i<obj.length;i++){
+
+                                if(obj[i].getAttribute("value")=="{$info.status}"){
+                                    obj[i].setAttribute("checked","checked");
+                                }
+                            }
+                        </script>
+                    </div>
+                    <input type="hidden" name="id" value="{$info.id}"/>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="bt" type="submit" class="btn btn-default">修改</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Page -->
+<include file="Layouts/footer" />
+
+<script>
+    $(function(){
+     $("#imgs").click(function(){
+         if(confirm("是否修改logo图片")){
+                $("#simg").css("display","block");
+         }else{
+             $("#simg").css("display","none");
+         }
+     })
+        $("#bt").click(function(){
+            if(confirm("确定修改站点信息")){
+                return true;
+            }else{
+                return false;
+            }
+        })
+    })
+</script>

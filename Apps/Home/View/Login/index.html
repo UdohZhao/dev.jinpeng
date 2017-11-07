@@ -1,0 +1,99 @@
+<include file="./Public/Bootstrap/header.html" />
+<!-- 当前页面css -->
+<link rel="stylesheet" href="/Apps/Home/View/Login/css/index.css">
+
+<!-- 页面主体 -->
+<div class="container-fluid">
+    <!-- Video Markup -->
+    <div class="row covervid-wrapper">
+      <video class="covervid-video" autoplay loop>
+        <source src="/Apps/Home/View/Login/video/112.mp4" type="video/mp4">
+      </video>
+    </div>
+</div>
+
+ <!-- 登录框 -->
+ <div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog loginPage" role="document">
+    <form id="loginForm" class="form-horizontal" action="__APP__/Login/index" method="post">
+    <div class="modal-content">
+      <div class="modal-header loginSchool">
+        <h4 class="modal-title loginSchool">
+          <img src="/Apps/Home/View/Login/img/金鹏实验小学.png">
+        </h4>
+      </div>
+      <div class="modal-header loginTitle">
+        <h4 class="modal-title loginTitle" id="gridSystemModalLabel">
+          <img src="/Apps/Home/View/Login/img/用户登录.png">
+        </h4>
+      </div>
+      <div class="modal-body">
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="text" class="form-control" id="inputEmail3" placeholder="请输入用户名" name="username">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <input type="password" class="form-control" id="inputPassword3" placeholder="请输入密码" name="password">
+            </div>
+          </div>
+          <div class="form-group">
+              <div class="col-sm-12">
+                <div class="yanzheng">
+                  <input type="text" class="form-control" id="inputPassword4" placeholder="输入验证码">
+                  <img class="inputPassword4_img" src="__APP__/Login/verifyCode" onclick="this.src=this.src+'?'+Math.random();"/>
+                </div>
+                <span class="inputPassword4_false"></span>
+              </div>
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="login_button">
+          <button type="submit" id="bt" class="btn btn-primary loginBtn">登录</button>
+          <!-- <img src="/Apps/Home/View/Login/img/登录.png"> -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        还没有账号?<button type="button" class="btn btn-link" onclick="javascript:window.location.href='__APP__/Signin/index'">立即注册</button>
+      </div>
+    </div><!-- /.modal-content -->
+    </form>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<include file="./Public/Bootstrap/footer.html" />
+<!-- 当前页面js -->
+<script src="/Apps/Home/View/Login/js/index.js"></script>
+<!-- 视频背景 -->
+<script src="/Apps/Home/View/Login/js/covervid.js"></script>
+<script></script>
+<script>
+    var isVerify='';
+    $('#bt').click(function(){
+        var verify = $('#inputPassword4').val();
+        $.ajax({
+            url:'__APP__/Login/verifyCode',
+            data:'code='+verify,
+            dataType:'json',
+            type:'post',
+            cache:false,//无缓存
+            async:false,//同步掉用数据
+            success:function(re){
+                if(re==true){
+                    //layer.msg('验证码成功',{ico:1,time:1000});
+                    isVerify=true;
+                }else{
+                    // layer.msg('验证码错误 ',{ico:2,time:1000});
+                    $(".inputPassword4_false").html("验证码错误");
+                    isVerify=false;
+                }
+            }
+        })
+        if(!isVerify){
+            return false;
+        }
+    })
+
+</script>

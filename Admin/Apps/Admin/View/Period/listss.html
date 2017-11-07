@@ -1,0 +1,70 @@
+<include file="Layouts/header" />
+<include file="Layouts/nav" />
+  <!-- Page -->
+  <div class="page animsition">
+    <div class="page-header">
+      <h1 class="page-title"># 周期管理</h1>
+    </div>
+    <div class="page-content">
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">周期列表</h3>
+        </div>
+        <form id="searchForm" action="__APP__/Period/listss" method="post">
+        <div class="input-group" style="margin-right: 20px;">
+            <input type="text" class="form-control input-lg" style="width: 200px;float: right;" placeholder="请输入关键字" name="search"><span class="input-group-addon btn btn-primary" onclick="$('#searchForm').submit();">搜索</span>
+        </div>
+        </form>
+        <div class="panel-body">
+           <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>周期</th>
+                <th>开始时间</th>
+                <th>结束时间</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+            <foreach name="data" item="vo" key="k">
+              <tr>
+                <td>
+                  <eq name="vo.status" value="0"><button type="button" class="btn btn-success btn-xs">最新</button></eq>
+                  <eq name="vo.status" value="1"><button type="button" class="btn btn-danger btn-xs">过期</button></eq>
+                  <eq name="vo.status" value="2"><button type="button" class="btn btn-success btn-xs">正在进行中</button></eq>
+                </td>
+                <td><a href="__APP__/Questionbank/listss/id/{$vo.id}" style="text-decoration:none;">{$vo.periods}</a></td>
+                <td>{$vo.start_time|date='Y-m-d',###}</td>
+                <td>{$vo.end_time|date='Y-m-d',###}</td>
+                <td>
+                  <if condition="($vo.status eq 0)">
+                    <!-- <button type="button" class="btn btn-primary btn-xs" onclick="quantity({$Think.config.QUESTIONS_AMOUNT});">评价条数</button> -->
+                    <button type="button" class="btn btn-success btn-xs" onclick="freeze({$vo.id},2);">开始</button>
+                    <!-- <button type="button" class="btn btn-primary btn-xs" onclick="javascript:window.location.href='__APP__/Period/index/id/{$vo.id}'">修改</button> -->
+                    <button type="button" class="btn btn-default btn-xs" onclick="del({$vo.id});">删除</button>
+                  <elseif condition="($vo.status eq 2)"/>
+                    <button type="button" class="btn btn-danger btn-xs" onclick="freeze({$vo.id},1);">过期</button>
+                  <else/>
+                  - - -
+                  </if>
+                  <!-- <eq name="vo.status" value="1">
+                    <button type="button" class="btn btn-success btn-xs" onclick="freeze({$vo.id},0);">最新</button>
+                  </eq> -->
+                  <!-- <button type="button" class="btn btn-default btn-xs">删除</button> -->
+                </td>
+              </tr>
+            </foreach>
+            </tbody>
+          </table>
+          <div style="float: right;">
+            {$page}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Page -->
+<include file="Layouts/footer" />
+<!-- 当前页面js -->
+<script src="/Admin/Apps/Admin/View/Period/js/listss.js"></script>

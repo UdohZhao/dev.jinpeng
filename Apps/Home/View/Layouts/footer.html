@@ -1,0 +1,58 @@
+                    </div>
+                </div>
+              </div>
+              <!-- 右侧内容 end -->
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- 修改密码模态框 -->
+<div id="changePassModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">修改密码</h4>
+      </div>
+      <div class="modal-body">
+        <form id="changePassform" action="__APP__/Signin/changePassword" method="post" class="form-horizontal">
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">用户名</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" value="{$Think.session.userinfo.username}" readonly="readonly">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputEmail3" class="col-sm-3 control-label">原始密码</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="password" id="password" placeholder="请输入原始密码">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">新密码</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="请输入新密码">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="inputPassword3" class="col-sm-3 control-label">确认新密码</label>
+            <div class="col-sm-9">
+              <input type="password" class="form-control" name="confirmPassword" placeholder="请再次输入新密码">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <button type="submit" class="btn btn-default">提 交</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- 页面主体 end -->
+<include file="./Public/Bootstrap/footer.html" />
+<!-- 公共页面js -->
+<script src="/Apps/Home/View/Layouts/js/common.js"></script>

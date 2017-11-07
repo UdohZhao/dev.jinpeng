@@ -1,0 +1,113 @@
+    <include file="./Public/Bootstrap/header.html" />
+    <!-- 当前页面CSS -->
+    <link rel="stylesheet" type="text/css" href="/Apps/Home/View/Student/css/overallRatings.css">
+
+
+    <include file="./Apps/Home/View/Stucommon/evaluationheader.html" />
+
+    <if condition="($Noperiod)">
+        <blockquote>
+            <p>{$Noperiod}</p>
+        </blockquote>
+        <else/>
+
+
+          <div class="col-md-12" style="position: relative;">
+            <span class="current_term">当前学期，本期得分</span>
+            <a href="__APP__/Student/supplementaryQuestion.html" class="entrance">补充题入口</a>
+          </div>
+        <div class="row" style="position: relative; margin-top: 30px;">
+          <div class="col-sm-6 mountain_pic">
+            <div class="pictureBox">
+              <div class="ulBox">
+                <ul class="nowHere">
+                  <li><img src="/Apps/Home/View/Student/img/水.png"></li>
+                  <li><img src="/Apps/Home/View/Student/img/水.png"></li>
+                </ul>
+                <!-- <ul class="redImg">
+                  <li><img src="/Apps/Home/View/Student/img/水1.png"></li>
+                  <li><img src="/Apps/Home/View/Student/img/水1.png"></li>
+                </ul> -->
+              </div>
+              <div class="aa"></div>
+            </div>
+            <div class="tu">
+              <img src="/Apps/Home/View/Student/img/山1.png">
+            </div>
+            <div class="wrapper">
+              <div class="counter col_fourth" style="color: red; font-weight: bolder;">
+                +<div class="timer timer6">{$totalScore}</div>
+                <div class="bian">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2 arrows">
+            <img src="/Apps/Home/View/Student/img/箭头.png">
+          </div>
+          <div class="col-sm-6 mountain_right">
+              <if condition="$totalScore eq 0.0">
+                  <p>&nbsp;老师还未评分哦，请等待</p>
+                  <else/>
+            <p>恭喜您获得了&nbsp;<span class="core">{$totalScore}</span>&nbsp;分</p>
+              </if>
+            <p class="encourage">继续加油吧!</p>
+            <input class="historyScore" type="hidden" value="{$scoreAll}">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </if>
+
+    <include file="./Public/Bootstrap/footer.html" />
+    <!-- 当前页面js -->
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/selfEvaluation.js"></script>
+    <script type="text/javascript" src="/Apps/Home/View/Student/js/overallRatings.js"></script>
+
+
+
+
+  <script type="text/javascript" src="/Apps/Home/View/Student/js/jquery.countUp.js"></script>
+  <script type="text/javascript">
+    <!--
+    //调用案例，需要在被调用的标签内 写上最终的数值
+    jQuery(function($) {
+        $(".timer").countTo({
+            lastSymbol:" ", //显示在最后的字符
+            from: 0,  // 开始时的数字
+            speed: 1000,  // 总时间
+            refreshInterval:100,  // 刷新一次的时间
+            beforeSize:0, //小数点前最小显示位数，不足的话用0代替 
+            decimals: 1,  // 小数点后的位数，小数做四舍五入
+            onUpdate: function() {
+            },  // 更新时回调函数
+            onComplete: function() {
+                for(i in arguments){
+                    //console.log(arguments[i]);
+                }
+            }
+        });
+    });
+    //-->
+
+    </script>
+<script>
+
+    if('{$webType}'==3){
+        $("#mask2",parent.document).parent().attr("style","background-color: #7b5028;");
+        $("#mask2",parent.document).attr("style","color: #fff;");
+
+        var obj=$("a[name='mask1']",parent.document).parent();
+        for(var i=0;i<obj.length;i++) {
+            $("a[name='mask1']", parent.document).eq(i).parent().attr("style", "");
+            $("a[name='mask1']", parent.document).eq(i).attr("style", "color: #000;");
+        }
+    }else{
+        $("#mask2",parent.document).parent().attr("style","");
+        $("#mask2",parent.document).attr("style","color: #000;");
+
+
+    }
+
+</script>

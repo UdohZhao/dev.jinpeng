@@ -1,0 +1,186 @@
+a{
+	text-decoration: none;
+}
+body{
+	background: none;
+}
+.back_img{
+	background: none;
+	background-image: url("../img/书3.png");
+	background-size: 100% 100%;
+	height: 90%;
+	width: 803px
+}
+h3{
+	margin: 0;
+}
+.content{
+	position: absolute;
+	top: 0px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 60px;
+	padding-bottom: 50px;
+	padding-left: 60px;
+	padding-right: 30px;
+}
+.current_term{
+	font-size: 18px;
+	font-weight: bold;
+}
+.content .col-md-12 a.entrance{
+	color: #000;
+	font-size: 16px;
+	font-weight: bold;
+	position: absolute;
+	top: 0;
+	right: 15px;
+	padding: 5px 10px;
+	background-color: #7b5028;
+	border-radius: 5px;
+	color: #ccc;
+}
+.content .col-md-12 a.entrance:hover{
+	text-decoration: none;
+}
+.arrows{
+	position: absolute;
+	top: 30%;
+	left: 35%;
+}
+.mountain_right{
+	padding-left: 50px;
+	padding-top:14%;
+	position: relative;
+}
+.mountain_right>p{
+	font-size: 22px;
+	font-weight: bold;
+}
+.mountain_right>p>span{
+	font-size: 30px;
+}
+.now_year{
+	margin-top: 30%;
+	text-align: right;
+}
+.mountain_pic{
+	height: 406px;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+}
+.pictureBox{
+	width: 100%;
+	overflow: hidden;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.ulBox{
+	width: 100%;
+	height: 21px;
+	overflow: hidden;
+	position: relative;
+	transition: all 3s;
+	-ms-transition: all 3s; 	/* IE 9 */
+	-moz-transition: all 3s; 	/* Firefox */
+	-webkit-transition: all 3s; /* Safari 和 Chrome */
+	-o-transition: all 3s; 	/* Opera */
+	/*margin-bottom: -3px;*/
+}
+/*.ulBox .redImg{
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 0;
+}
+.ulBox .redImg li{
+	position: relative;
+}
+.ulBox .redImg img{
+	height: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	transition: all 1s;
+	-ms-transition: all 1s; 	/* IE 9 */
+	/*-moz-transition: all 1s;*/ 	/* Firefox */
+	/*-webkit-transition: all 1s;*/ /* Safari 和 Chrome */
+	/*-o-transition: all 1s; */	/* Opera */
+	/*margin-bottom: -3px;*/
+/*}*/
+.ulBox .nowHere img{
+	height: 21px;
+	margin-bottom: -3px;
+}
+.pictureBox ul{
+	list-style: none;
+	height: 100%;
+	padding-left: 0;
+	width: 200%;
+	margin: 0;
+	margin-bottom: -3px;
+	height: 21px;
+	
+}
+.pictureBox ul li{
+	float: left;
+	width: 50%;
+	height: 21px;
+}
+.pictureBox ul li img{
+	width: 100%;
+}
+.avtive{
+	transition: all 3s;
+	-ms-transition: all 3s; 	/* IE 9 */
+	-moz-transition: all 3s; 	/* Firefox */
+	-webkit-transition: all 3s; /* Safari 和 Chrome */
+	-o-transition: all 3s; 	/* Opera */
+}
+.tu{
+	width: 100%;
+	height: 406px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.tu img{
+	width: 100%;
+	height: 100%;
+}
+.wrapper{
+	width: 40px;
+	height: 406px;
+	display: inline-block;
+	position: relative;
+	margin-left: 320px;
+}
+.col_fourth{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.bian{
+	height: 0px;
+	transition: all 1s;
+	-ms-transition: all 1s; 	/* IE 9 */
+	-moz-transition: all 1s; 	/* Firefox */
+	-webkit-transition: all 1s; /* Safari 和 Chrome */
+	-o-transition: all 1s; 	/* Opera */
+}
+.aa{
+	transition: all 3s;
+	-ms-transition: all 3s; 	/* IE 9 */
+	-moz-transition: all 3s; 	/* Firefox */
+	-webkit-transition: all 3s; /* Safari 和 Chrome */
+	-o-transition: all 3s; 	/* Opera */
+	background-color: #2b7619;
+}
+.timer{
+	display: inline-block;
+	color: red;
+	font-size: 18px;
+}

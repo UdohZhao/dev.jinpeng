@@ -1,0 +1,157 @@
+body{
+	background: none;
+	font-family: "微软雅黑","Hiragino Sans GB","Microsoft Yahei",sans-serif;
+}
+a{
+	text-decoration: none;
+}
+.back_img{
+	background: none;
+	background-image: url("../img/书3.png");
+	background-size: 100% 100%;
+	opacity: .85;
+	width: 803px;
+}
+h3{
+	margin: 0;
+}
+h3 a{
+	color: #000;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: none;
+}
+h3 a:hover{
+	text-decoration: none;
+}
+.content{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/*height: 100% !important;*/
+	padding-top: 80px;
+	padding-bottom: 20px;
+	padding-left: 90px;
+	padding-right: 45px;
+}
+.content>.col-md-12{
+	margin-bottom: 30px;
+}
+.content>.col-md-12>.row{
+	margin-top: 10px;
+}
+.list-inline{
+	position: relative;
+	padding-left: 47px;
+	margin-bottom: 10px;
+}
+.list-inline li{
+	position: relative;
+	width: 49%;
+	vertical-align: top;
+	margin-bottom:5px;
+}
+.list-inline a{
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-color: #fff;
+	border: 1px solid #dbd0af;
+	position:absolute;
+	top: 0px;
+	left: 0px;
+}
+.list-inline a>img{
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+.list-inline p{
+	font-size: 16px;
+	color: #000;
+	margin-left: 20px;
+	letter-spacing: 1px;
+	margin-bottom: 0;
+}
+.content_topic{
+	padding-left: 0;
+}
+.content_topic>p{
+	color: #000;
+	margin-bottom: 0;
+	line-height: 25px;
+	font-size: 16px;
+}
+/*.topic_num{
+	width: 2%;
+	position: absolute;
+	top: 0;
+	left: 0;
+}*/
+.topic_num a{
+	display: block;
+	/*background-color:#e3e3a8;*/
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	line-height: 25px;
+	text-decoration: none;
+	color: #333;
+	background-image: url("../img/题号背景.png");
+}
+.topic_content{
+	font-size: 16px;
+	width: 96%;
+	margin-left: 3%;
+	letter-spacing: 0.1em;
+	line-height: 20px;
+}
+.submit{
+	position: absolute;
+	bottom: 60px;
+	right: 50px;
+	border: none;
+	background-color: #7b5028;
+	padding: 10px 10px;
+	color: #fff;
+	border-radius: 5px;
+	text-align: center;
+}
+.table-bordered{
+	border: 1px solid #000;
+	border-radius: 4px;
+	overflow: hidden;
+}
+table{
+	border-collapse: inherit;
+}
+caption{
+	color: #000;
+}
+.page a{
+	color: #7b5028;
+	text-decoration: none;
+	font-weight: bolder;
+}
+.table-bordered > thead > tr > td, .table-bordered > thead > tr > th{
+	border-bottom-width: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+/*.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th{
+	border: 0px solid #000;
+}*/
+.table-bordered > tbody > tr > td,.table-bordered > thead > tr > th{
+	border: 0px solid #000;
+}
+ .table-bordered > thead > tr > th{
+ 	border-bottom: 1px solid #000;
+ }
+.table-bordered>thead>tr>th{
+	border-left: 1px solid #000;
+}
+.table-bordered>tbody>tr>td{
+	border-left: 1px solid #000;
+	border-top:none;
+}
